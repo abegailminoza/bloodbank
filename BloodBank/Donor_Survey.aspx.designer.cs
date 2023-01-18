@@ -33,12 +33,34 @@ namespace BloodBank
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl username;
 
         /// <summary>
+<<<<<<< HEAD
         /// SubmitSurvey control.
+=======
+        /// BtnLogout control.
+>>>>>>> be1ee5082587a96a080364808e9c54bc2fccca6c
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+<<<<<<< HEAD
+        protected global::System.Web.UI.WebControls.Button SubmitSurvey;
+
+        /// <summary>
+        /// samp control.
+=======
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor BtnLogout;
+
+        /// <summary>
+        /// SubmitSurvey control.
+>>>>>>> be1ee5082587a96a080364808e9c54bc2fccca6c
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+<<<<<<< HEAD
+=======
         protected global::System.Web.UI.WebControls.Button SubmitSurvey;
 
         /// <summary>
@@ -48,6 +70,7 @@ namespace BloodBank
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+>>>>>>> be1ee5082587a96a080364808e9c54bc2fccca6c
         protected global::System.Web.UI.WebControls.Button samp;
     }
 }

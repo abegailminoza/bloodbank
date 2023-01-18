@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -201,6 +202,7 @@ namespace BloodBank
         private void UserRequestSurveyResponse(bool res)
         {
             blood_donation bd = Session["BloodDonation"] as blood_donation;
+            bloodbank bb = Session["bloodbank"] as bloodbank;
             string query = "";
 
             if (res)
@@ -208,6 +210,20 @@ namespace BloodBank
                 query = string.Format(@"update blood_donation set BD_SURVEY_STATUS={0} where BD_ID={1}", res, bd.BD_ID);
                 if (db.UpdateBloodRequestStatus(query))
                 {
+                    //Create Login Logs
+                    string description = string.Format("BloodBank Accepted User {0} ( ", bd.BD_UACC_ID);
+                    query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
+                                            select concat('{0}', UACC_FIRST, ' ', UACC_LAST, ' ) Initial Blood Donation Request Form'), {1}, '{2}' from user_account
+                                            where UACC_ID={3};", description, bb.BB_ID, bb.BB_USERNAME, bd.BD_UACC_ID);
+
+                    Debug.Print(query);
+                    bool x = db.InsertBloodBankLogs(query);
+                    //If Not Successfully Inserted Logs
+                    if (!x)
+                    {
+                        Debug.Print("BloodBank Logs Not Inserted");
+                    }
+
                     //Success
                     Response.Write(string.Format("<script>alert('User {0} blood donation survey was successfully approved.')</script>", bd.BD_UACC_ID));
 
@@ -219,7 +235,19 @@ namespace BloodBank
             {
                 query = string.Format(@"update blood_request set BREQ_SURVEY_STATUS=false, BREQ_BLOOD_STATUS=false, BREQ_REQ_STATUS={0} where BREQ_ID={1}", res, bd.BD_ID);
                 if (db.UpdateBloodRequestStatus(query))
-                {
+                {//Create Login Logs
+                    string description = string.Format("BloodBank Rejected User {0} ( ", bd.BD_UACC_ID);
+                    query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
+                                            select concat('{0}', UACC_FIRST, ' ', UACC_LAST, ' ) Initial Blood Donation Request Form'), {1}, '{2}' from user_account
+                                            where UACC_ID={3};", description, bb.BB_ID, bb.BB_USERNAME, bd.BD_UACC_ID);
+
+                    Debug.Print(query);
+                    bool x = db.InsertBloodBankLogs(query);
+                    //If Not Successfully Inserted Logs
+                    if (!x)
+                    {
+                        Debug.Print("BloodBank Logs Not Inserted");
+                    }
                     //Success
                     Response.Write(string.Format("<script>alert('User {0} blood request survey was successfully rejected.')</script>", bd.BD_UACC_ID));
 
@@ -233,13 +261,26 @@ namespace BloodBank
         private void UserRequestBloodResponse(bool res)
         {
             blood_donation bd = Session["BloodDonation"] as blood_donation;
+            bloodbank bb = Session["bloodbank"] as bloodbank;
             string query = "";
 
             if (res)
             {
-                query = string.Format(@"update blood_request set BD_BLOOD_STATUS={0} where BD_ID={1}", res, bd.BD_ID);
+                query = string.Format(@"update blood_donation set BD_BLOOD_STATUS={0} where BD_ID={1}", res, bd.BD_ID);
                 if (db.UpdateBloodRequestStatus(query))
-                {
+                {//Create Login Logs
+                    string description = string.Format("BloodBank Accepted User {0} ( ", bd.BD_UACC_ID);
+                    query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
+                                            select concat('{0}', UACC_FIRST, ' ', UACC_LAST, ' ) Initial Blood Donation Request Form'), {1}, '{2}' from user_account
+                                            where UACC_ID={3};", description, bb.BB_ID, bb.BB_USERNAME, bd.BD_UACC_ID);
+
+                    Debug.Print(query);
+                    bool x = db.InsertBloodBankLogs(query);
+                    //If Not Successfully Inserted Logs
+                    if (!x)
+                    {
+                        Debug.Print("BloodBank Logs Not Inserted");
+                    }
                     //Success
                     Response.Write(string.Format("<script>alert('User {0} blood donation was successfully approved.')</script>", bd.BD_ID));
 
@@ -249,9 +290,21 @@ namespace BloodBank
             }
             else
             {
-                query = string.Format(@"update blood_request set BD_BLOOD_STATUS=false, BD_REQ_STATUS={0} where BREQ_ID={1}", res, bd.BD_ID);
+                query = string.Format(@"update blood_donation set BD_BLOOD_STATUS=false, BD_REQ_STATUS={0} where BREQ_ID={1}", res, bd.BD_ID);
                 if (db.UpdateBloodRequestStatus(query))
-                {
+                {//Create Login Logs
+                    string description = string.Format("BloodBank Rejected User {0} ( ", bd.BD_UACC_ID);
+                    query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
+                                            select concat('{0}', UACC_FIRST, ' ', UACC_LAST, ' ) Final Blood Donation Request Form'), {1}, '{2}' from user_account
+                                            where UACC_ID={3};", description, bb.BB_ID, bb.BB_USERNAME, bd.BD_UACC_ID);
+
+                    Debug.Print(query);
+                    bool x = db.InsertBloodBankLogs(query);
+                    //If Not Successfully Inserted Logs
+                    if (!x)
+                    {
+                        Debug.Print("BloodBank Logs Not Inserted");
+                    }
                     //Success
                     Response.Write(string.Format("<script>alert('User {0} blood donation was successfully rejected.')</script>", bd.BD_ID));
 
@@ -263,7 +316,6 @@ namespace BloodBank
 
         protected void ApproveSurveyBtn_Click(object sender, EventArgs e)
         {
-            Response.Write("Hello");
             UserRequestSurveyResponse(true);
         }
 
@@ -280,6 +332,14 @@ namespace BloodBank
         protected void RejectBloodBtn_Click(object sender, EventArgs e)
         {
             UserRequestBloodResponse(false);
+        }
+
+        protected void BtnLogout_ServerClick(object sender, EventArgs e)
+        {
+
+            Session.Clear();
+            Session.RemoveAll();
+            Server.Transfer("~/Default.aspx");
         }
     }
 }

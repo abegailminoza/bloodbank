@@ -49,6 +49,16 @@ namespace BloodBank.Database
         public string BD_DATE { get; set; }
     }
 
+    public class activity_log
+    {
+
+        public string ACT_ID { get; set; }
+        public string ACT_DESCRIPTION { get; set; }
+        public string ACT_UACC_ID { get; set; }
+        public string ACT_UNAME { get; set; }
+        public string ACT_DATE { get; set; }
+    }
+
     [Serializable]
     public class request_survey_form
     {

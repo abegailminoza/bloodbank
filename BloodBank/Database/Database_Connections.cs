@@ -96,7 +96,7 @@ namespace BloodBank.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = "select * from bloodbanklogs order by BL_DATE desc;";
+                cmd.CommandText = "select * from activity_logs order by ACT_DATE desc;";
                 da = new MySqlDataAdapter(cmd);
                 da.Fill(dt);
                 con.Close();
