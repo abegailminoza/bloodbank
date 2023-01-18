@@ -90,13 +90,14 @@ namespace BloodBank.Database
         //If pang populate sa GridView DataTable jud ang datatype nga gamiton
         public DataTable GetBloodBankLogsTableData()
         {
+           
             DataTable dt = new DataTable();
             try
             {
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = "select * from activity_logs order by ACT_DATE desc;";
+                cmd.CommandText = "select * from activity_logs where ACT_UNAME='BloodBank' order by ACT_DATE desc;";
                 da = new MySqlDataAdapter(cmd);
                 da.Fill(dt);
                 con.Close();

@@ -145,7 +145,14 @@ namespace BloodBank
             switch(x)
             {
                 case 0:
-                    query = string.Format("select * from blood_request where BREQ_UACC_ID={0};", SearchRequest.Text);
+                    query = string.Format(@"select BREQ_ID, BREQ_UACC_ID, BREQ_JSON_SURVEY_FORM, BREQ_REQ_STATUS, BREQ_DATE,
+                                            if(BREQ_SURVEY_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
+                                            if(BREQ_SURVEY_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
+                                            if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_SURVEY_STATUS,
+                                            if(BREQ_BLOOD_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
+                                            if(BREQ_BLOOD_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
+                                            if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_BLOOD_STATUS
+                                             from blood_request where BREQ_UACC_ID={0};", SearchRequest.Text);
                     dt = db.GetBloodTransactionTableData(query);
                     if (dt != null)
                     {
@@ -160,13 +167,20 @@ namespace BloodBank
                     }
                     break;
                 case 1:
-                    query = string.Format("select * from blood_donation where BREQ_UACC_ID={0};", SearchRequest.Text);
+                    query = string.Format(@"select BD_ID, BD_UACC_ID, BD_JSON_SURVEY_FORM, BD_REQ_STATUS, BD_DATE,
+                                            if(BD_SURVEY_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
+                                            if(BD_SURVEY_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
+                                            if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_SURVEY_STATUS,
+                                            if(BD_BLOOD_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
+                                            if(BD_BLOOD_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
+                                            if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_BLOOD_STATUS
+                                             from blood_donation where BD_UACC_ID={0};", SearchRequest.Text);
                     dt = db.GetuserBloodDonation(query);
                     if (dt != null)
                     {
-                        GridUserBloodRequest.DataSource = null;
-                        GridUserBloodRequest.DataSource = dt;
-                        GridUserBloodRequest.DataBind();
+                        GridUserBloodDonation.DataSource = null;
+                        GridUserBloodDonation.DataSource = dt;
+                        GridUserBloodDonation.DataBind();
                         SearchRequest.Text = "";
                     }
                     else

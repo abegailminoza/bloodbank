@@ -109,10 +109,10 @@ namespace BloodBank
                 if(db.UpdateBloodRequestStatus(query))
                 {
                     //Create Login Logs
-                    string description = string.Format("BloodBank Accepted User {0} ( ", br.BREQ_UACC_ID);
+                    string description = string.Format("{0} Accepted User {1} ( ",bb.BB_USERNAME, br.BREQ_UACC_ID);
                     query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
                                             select concat('{0}', UACC_FIRST, ' ', UACC_LAST, ') Initial Blood Request Form'), {1}, '{2}' from user_account
-                                            where UACC_ID={3};", description, bb.BB_ID, bb.BB_USERNAME, br.BREQ_UACC_ID);
+                                            where UACC_ID={3};", description, bb.BB_ID, "BloodBank", br.BREQ_UACC_ID);
                     Debug.Print(query);
                     bool x = db.InsertBloodBankLogs(query);
                     //If Not Successfully Inserted Logs

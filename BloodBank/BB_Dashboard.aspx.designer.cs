@@ -32,6 +32,8 @@ namespace BloodBank
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl username;
 
+        
+
         /// <summary>
         /// BtnLogout control.
         /// </summary>
