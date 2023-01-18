@@ -68,7 +68,7 @@ namespace BloodBank
                     else
                     {
                         //Personnel (Bata-bata)
-                        msg = "Personnel (Bata-bata)";
+                        msg = "Personnel";
                     }
 
                     Response.Write("<script>alert('" + msg + "')</script>");

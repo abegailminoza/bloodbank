@@ -35,7 +35,7 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link active" href="BB_Dashboard.aspx"><i class="fas fa-tachometer-alt" style="font-size: 20px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="table.html"><i class="fas fa-table" style="font-size: 20px;"></i><span style="font-size: 15px;">Transaction Details</span></a></li>
+                   
                     <li class="nav-item"><a class="nav-link" href="BB_BloodTransaction.aspx"><i class="fa fa-tint" style="font-size: 20px;"></i><span style="font-size: 15px;">Blood Transaction</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="BB_ActionLogs.aspx"><i class="fa fa-list-ul" style="font-size: 20px;"></i><span style="font-size: 15px;">Action Log</span></a></li>
                 </ul>
@@ -79,7 +79,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="row d-flex flex-column">
                                                 <div class="col d-flex" style="margin-bottom: 10px;">
                                                     <div class="card" style="width: 100%;">
@@ -132,7 +132,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="row d-flex flex-column">
                                                 <div class="col d-flex" style="margin-bottom: 10px;">
                                                     <div class="card" style="width: 100%;">
@@ -187,7 +187,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <div class="card d-flex">
                                         <div class="card-header" style="background: var(--red);padding: 0px;padding-top: 9px;">
                                             <h3 class="text-center" style="font-weight: bold;color: var(--white);">Blood Transactions</h3>
