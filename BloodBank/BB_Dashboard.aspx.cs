@@ -38,19 +38,19 @@ namespace BloodBank
             query = "select count(distinct BREQ_UACC_ID) as REQ_COUNT from blood_request join user_account on UACC_ID=BREQ_UACC_ID where UACC_STATUS=true;";
             NumberRequestor.InnerText = db.GetCount(query).ToString();
 
-            query = "select count(distinct BD_UACC_ID) as DON_COUNT from blood_donation join user_account on UACC_ID=BD_UACC_ID where UACC_STATUS=true;";
+            query = "select count(distinct BD_UACC_ID) as DON_COUNT from blood_donation join user_account on UACC_ID=BD_UACC_ID where (BD_SURVEY_STATUS = true and BD_BLOOD_STATUS = true) and BD_REQ_STATUS=true and UACC_STATUS=true;";
             NumberDonor.InnerText = db.GetCount(query).ToString();
 
 
             //Populate Transaction NUmbers
-            query = @"select ((select count(*) from blood_donation where (BD_SURVEY_STATUS = false || BD_BLOOD_STATUS = false) and BD_REQ_STATUS=true)
-                        + (select count(*) from blood_request where (BREQ_SURVEY_STATUS = false || BREQ_BLOOD_STATUS = false) and BREQ_REQ_STATUS=true)) as Total;";
+            query = @"select ((select count(*) from blood_donation where (BD_SURVEY_STATUS = false or BD_BLOOD_STATUS = false) and BD_REQ_STATUS=true)
+                        + (select count(*) from blood_request where (BREQ_SURVEY_STATUS = false or BREQ_BLOOD_STATUS = false) and BREQ_REQ_STATUS=true)) as Total;";
             TotalNumberTransaction.InnerText = db.GetCount(query).ToString();
 
-            query = @"select count(*) from blood_request where (BREQ_SURVEY_STATUS = false || BREQ_BLOOD_STATUS = false) and BREQ_REQ_STATUS=true;";
+            query = @"select count(*) from blood_request where (BREQ_SURVEY_STATUS = false or BREQ_BLOOD_STATUS = false) and BREQ_REQ_STATUS=true;";
             NumberRequestTransaction.InnerText = db.GetCount(query).ToString();
 
-            query = @"select count(*) from blood_donation where (BD_SURVEY_STATUS = false || BD_BLOOD_STATUS = false) and BD_REQ_STATUS=true;";
+            query = @"select count(*) from blood_donation where (BD_SURVEY_STATUS = false or BD_BLOOD_STATUS = false) and BD_REQ_STATUS=true;";
             NumberDonationTransaction.InnerText = db.GetCount(query).ToString();
 
             int[] transactions = new int[3];
@@ -72,6 +72,13 @@ namespace BloodBank
 
             Labels = lbl;
             Data = transactions;
+        }
+
+        protected void BtnLogout_ServerClick(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.RemoveAll();
+            Response.Redirect("~/Default.aspx");
         }
     }
 }
