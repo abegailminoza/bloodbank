@@ -49,8 +49,8 @@ namespace BloodBank
                     Session["bloodbank"] = bb;
 
                     //Create Login Logs
-                    query = string.Format(@"insert into bloodbanklogs(BL_DESCRIPTION, BL_BB_ID) 
-                                            values('{0}', {1});", "User " + bb.BB_USERNAME + " Logged In", bb.BB_ID);
+                    query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME) 
+                                            values('{0}', {1}, '{2}');", "User " + bb.BB_USERNAME + " Logged In", bb.BB_ID, bb.BB_USERNAME);
                     Debug.Print(query);
                     bool res = db.InsertBloodBankLogs(query);
                     //If Not Successfully Inserted Logs
