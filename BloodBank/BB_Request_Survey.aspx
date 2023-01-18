@@ -162,8 +162,8 @@
                         </div>
                         <div class="card-footer text-muted">
                             <div runat="server" id="SurveyGroup" style="display: none;">
-                                <asp:Button runat="server" OnClick="ApproveSurveyBtn_Click" ID="ApproveSurveyBtn" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="button" Text="Approve Survey" />
-                                <asp:Button runat="server" OnClick="RejectSurveyBtn_Click" ID="RejectSurveyBtn" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="button" Text="Reject Survey" />
+                                <asp:Button runat="server" OnClick="ApproveSurveyBtn_Click" ID="ApproveSurveyBtn" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="button" Text="Approve Request Form" />
+                                <asp:Button runat="server" OnClick="RejectSurveyBtn_Click" ID="RejectSurveyBtn" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="button" Text="Reject Request Form" />
                             </div>
                             <div runat="server" id="BloodGroup" style="display: none;">
                                 <asp:Button runat="server" OnClick="ApproveBloodBtn_Click" ID="ApproveBloodBtn" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="button" Text="Approve Blood Transaction" />

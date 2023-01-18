@@ -618,8 +618,8 @@
                         </div>
                         <div class="card-footer text-muted">
                             <div runat="server" id="SurveyGroup" style="display: none;">
-                                <asp:Button runat="server" ID="ApproveSurveyBtn" OnClick="ApproveSurveyBtn_Click" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="reset" Text="Approve Survey" UseSubmitBehavior="false" />
-                                <asp:Button runat="server" ID="RejectSurveyBtn" OnClick="RejectSurveyBtn_Click" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="reset" Text="Reject Survey" UseSubmitBehavior="false" />
+                                <asp:Button runat="server" ID="ApproveSurveyBtn" OnClick="ApproveSurveyBtn_Click" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="reset" Text="Approve Request Form" UseSubmitBehavior="false" />
+                                <asp:Button runat="server" ID="RejectSurveyBtn" OnClick="RejectSurveyBtn_Click" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="reset" Text="Reject Request Form" UseSubmitBehavior="false" />
                             </div>
                             <div runat="server" id="BloodGroup" style="display: none;">
                                 <asp:Button runat="server" ID="ApproveBloodBtn" OnClick="ApproveBloodBtn_Click" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="reset" Text="Approve Blood Transaction" UseSubmitBehavior="false"  />
