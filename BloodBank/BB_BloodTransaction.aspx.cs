@@ -33,7 +33,7 @@ namespace BloodBank
         private void PopulateRequestBloodGrid()
         {
             string stat = RequestStatus.SelectedValue;
-            string query = string.Format(@"select BREQ_ID, BREQ_UACC_ID, BREQ_JSON_SURVEY_FORM, BREQ_REQ_STATUS, BREQ_DATE,
+            string query = string.Format(@"select BREQ_ID, BREQ_UACC_ID, BREQ_JSON_SURVEY_FORM, BREQ_REQ_STATUS, BREQ_DATE, BREQ_VISIT_DATE,
                                             if(BREQ_SURVEY_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
                                             if(BREQ_SURVEY_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
                                             if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_SURVEY_STATUS,
@@ -70,7 +70,7 @@ namespace BloodBank
         private void PopulateDonationBloodGrid()
         {
             string stat = RequestStatus.SelectedValue;
-            string query = string.Format(@"select BD_ID, BD_UACC_ID, BD_JSON_SURVEY_FORM, BD_REQ_STATUS, BD_DATE,
+            string query = string.Format(@"select BD_ID, BD_UACC_ID, BD_JSON_SURVEY_FORM, BD_REQ_STATUS, BD_DATE, BD_VISIT_DATE,
                                             if(BD_SURVEY_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
                                             if(BD_SURVEY_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
                                             if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_SURVEY_STATUS,

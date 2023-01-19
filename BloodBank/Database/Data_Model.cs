@@ -35,6 +35,7 @@ namespace BloodBank.Database
         public bool BREQ_BLOOD_STATUS { get; set; }
         public bool BREQ_REQ_STATUS { get; set; }
         public string BREQ_DATE { get; set; }
+        public string BREQ_VISIT_DATE { get; set; }
     }
 
     [Serializable]
@@ -89,6 +90,17 @@ namespace BloodBank.Database
             healthAssessment = new HealthAssessment();
             riskAssessment = new RiskAssessment();
         }
+    }
+    [Serializable]
+    public class notification
+    {
+        public string NTF_ID { get; set; }
+        public string NTF_SUBJECT { get; set; }
+        public string NTF_MESSAGE { get; set; }
+        public string NTF_RECEIVER_ID { get; set; }
+        public string NTF_SENDER_ID { get; set; }
+        public string NTF_STATUS { get; set; }
+        public string NTF_DATE { get; set; }
     }
 
     [Serializable]

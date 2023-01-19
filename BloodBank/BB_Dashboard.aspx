@@ -79,9 +79,9 @@
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
                         <div id="content">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-7">
                                     <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-6">
                                             <div class="row d-flex flex-column">
                                                 <div class="col d-flex" style="margin-bottom: 10px;">
                                                     <div class="card" style="width: 100%;">
@@ -134,7 +134,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-6">
                                             <div class="row d-flex flex-column">
                                                 <div class="col d-flex" style="margin-bottom: 10px;">
                                                     <div class="card" style="width: 100%;">
@@ -189,7 +189,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-5">
                                     <div class="card d-flex">
                                         <div class="card-header" style="background: var(--red);padding: 0px;padding-top: 9px;">
                                             <h3 class="text-center" style="font-weight: bold;color: var(--white);">Blood Transactions</h3>

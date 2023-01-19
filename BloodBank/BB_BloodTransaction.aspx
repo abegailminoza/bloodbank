@@ -107,8 +107,9 @@
                                         <asp:BoundField HeaderText="ID" DataField="BREQ_ID" />
                                         <asp:BoundField HeaderText="REQUESTER" DataField="BREQ_UACC_ID" />
                                         <asp:BoundField HeaderText="INITIAL STATUS" DataField="BREQ_SURVEY_STATUS" />
+                                        <asp:BoundField HeaderText="REQUEST DATE" DataField="BREQ_DATE" />
+                                        <asp:BoundField HeaderText="VISITATION DATE" DataField="BREQ_VISIT_DATE" />
                                         <asp:BoundField HeaderText="FINAL STATUS" DataField="BREQ_BLOOD_STATUS" />
-                                        <asp:BoundField HeaderText="DATE" DataField="BREQ_DATE" />
                                         <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="grid-select-btn" />
                                     </Columns>
                                 </asp:GridView>
@@ -120,8 +121,9 @@
                                         <asp:BoundField HeaderText="ID" DataField="BD_ID" />
                                         <asp:BoundField HeaderText="DONATOR" DataField="BD_UACC_ID" />
                                         <asp:BoundField HeaderText="INITIAL STATUS" DataField="BD_SURVEY_STATUS" />
+                                        <asp:BoundField HeaderText="REQUEST DATE" DataField="BD_DATE" />
+                                        <asp:BoundField HeaderText="VISITATION DATE" DataField="BD_VISIT_DATE" />
                                         <asp:BoundField HeaderText="FINAL STATUS" DataField="BD_BLOOD_STATUS" />
-                                        <asp:BoundField HeaderText="DATE" DataField="BD_DATE" />
                                         <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="grid-select-btn" />
                                     </Columns>
                                 </asp:GridView>
