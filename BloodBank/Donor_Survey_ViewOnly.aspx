@@ -89,8 +89,7 @@
                             <input class="form-control-plaintext" type="text" value="Dashboard" readonly="" style="font-size: 40px;">
                         </div>
                         <ul class="navbar-nav flex-nowrap ml-auto">
-                            
-                             <li class="nav-item dropdown no-arrow mx-1">
+                            <li class="nav-item dropdown no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow">
                                     <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
@@ -98,7 +97,7 @@
                                             <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
                                                 <asp:Repeater runat="server" ID="NotificationNavList">
                                                     <ItemTemplate>
-                                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                                        <a class="dropdown-item d-flex align-items-center" href="BB_Notification.aspx">
                                                             <div class="me-3">
                                                                 <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
                                                             </div>
@@ -110,11 +109,10 @@
                                                     </ItemTemplate>
                                                 </asp:Repeater>
                                             </div>
-                                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+                                        <a class="dropdown-item text-center small text-gray-500" href="BB_Notification.aspx">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
-
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown show no-arrow">
