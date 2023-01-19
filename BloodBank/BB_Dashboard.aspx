@@ -37,7 +37,7 @@
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link active" href="BB_Dashboard.aspx"><i class="fas fa-tachometer-alt" style="font-size: 20px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="BB_BloodTransaction.aspx"><i class="fa fa-tint" style="font-size: 20px;"></i><span style="font-size: 15px;">Blood Transaction</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="BB_ActionLogs.aspx"><i class="fa fa-list-ul" style="font-size: 20px;"></i><span style="font-size: 15px;">Action Log</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="BB_ActionLogs.aspx"><i class="fa fa-list-ul" style="font-size: 20px;"></i><span style="font-size: 15px;">Action Logs</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"></div>
             </div>
@@ -48,20 +48,32 @@
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <div class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"><input class="form-control-plaintext" type="text" value="Dashboard" readonly="" style="font-size: 40px;"></div>
                         <ul class="navbar-nav flex-nowrap ml-auto">
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="badge badge-danger badge-counter">3+</span><i class="fas fa-bell fa-fw" style="font-size: 29px;color: rgb(119,40,32);"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-list animated--grow-in">
-                                        <h6 class="dropdown-header">alerts center</h6><a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="mr-3">
-                                                <div class="bg-primary icon-circle"><i class="fas fa-tint text-white"></i></div>
+                           
+                             <li class="nav-item dropdown no-arrow mx-1">
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+                                        <h6 class="dropdown-header" style="background: rgb(119,40,32);">NOTIFICATIONS</h6>
+                                            <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
+                                                <asp:Repeater runat="server" ID="NotificationNavList">
+                                                    <ItemTemplate>
+                                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                                            <div class="me-3">
+                                                                <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
+                                                            </div>
+                                                            <div>
+                                                                <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
+                                                                <p><%# Eval("NTF_SUBJECT") %></p>
+                                                            </div>
+                                                            </a>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
                                             </div>
-                                            <div><span class="small text-gray-500">December 12, 2019</span>
-                                                <p>New Blood Request</p>
-                                            </div>
-                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
+
                                <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
 

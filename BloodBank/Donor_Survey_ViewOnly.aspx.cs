@@ -236,10 +236,10 @@ namespace BloodBank
                 query = string.Format(@"update blood_request set BREQ_SURVEY_STATUS=false, BREQ_BLOOD_STATUS=false, BREQ_REQ_STATUS={0} where BREQ_ID={1}", res, bd.BD_ID);
                 if (db.UpdateBloodRequestStatus(query))
                 {//Create Login Logs
-                    string description = string.Format("BloodBank Rejected User {0} ( ", bd.BD_UACC_ID);
+                    string description = string.Format("{0} Rejected User {1} ( ", bb.BB_USERNAME, bd.BD_UACC_ID);
                     query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
                                             select concat('{0}', UACC_FIRST, ' ', UACC_LAST, ' ) Initial Blood Donation Request Form'), {1}, '{2}' from user_account
-                                            where UACC_ID={3};", description, bb.BB_ID, bb.BB_USERNAME, bd.BD_UACC_ID);
+                                            where UACC_ID={3};", description, bb.BB_ID, "BloodBank", bd.BD_UACC_ID);
 
                     Debug.Print(query);
                     bool x = db.InsertBloodBankLogs(query);
@@ -269,10 +269,10 @@ namespace BloodBank
                 query = string.Format(@"update blood_donation set BD_BLOOD_STATUS={0} where BD_ID={1}", res, bd.BD_ID);
                 if (db.UpdateBloodRequestStatus(query))
                 {//Create Login Logs
-                    string description = string.Format("BloodBank Accepted User {0} ( ", bd.BD_UACC_ID);
+                    string description = string.Format("{0} Accepted User {1} ( ", bb.BB_USERNAME, bd.BD_UACC_ID);
                     query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
-                                            select concat('{0}', UACC_FIRST, ' ', UACC_LAST, ' ) Initial Blood Donation Request Form'), {1}, '{2}' from user_account
-                                            where UACC_ID={3};", description, bb.BB_ID, bb.BB_USERNAME, bd.BD_UACC_ID);
+                                            select concat('{0}', UACC_FIRST, ' ', UACC_LAST, ' ) Final  Blood Donation Request Form'), {1}, '{2}' from user_account
+                                            where UACC_ID={3};", description, bb.BB_ID, "BloodBank", bd.BD_UACC_ID);
 
                     Debug.Print(query);
                     bool x = db.InsertBloodBankLogs(query);
@@ -293,10 +293,10 @@ namespace BloodBank
                 query = string.Format(@"update blood_donation set BD_BLOOD_STATUS=false, BD_REQ_STATUS={0} where BREQ_ID={1}", res, bd.BD_ID);
                 if (db.UpdateBloodRequestStatus(query))
                 {//Create Login Logs
-                    string description = string.Format("BloodBank Rejected User {0} ( ", bd.BD_UACC_ID);
+                    string description = string.Format("{0} Rejected User {1} ( ", bb.BB_USERNAME, bd.BD_UACC_ID);
                     query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
                                             select concat('{0}', UACC_FIRST, ' ', UACC_LAST, ' ) Final Blood Donation Request Form'), {1}, '{2}' from user_account
-                                            where UACC_ID={3};", description, bb.BB_ID, bb.BB_USERNAME, bd.BD_UACC_ID);
+                                            where UACC_ID={3};", description, bb.BB_ID, "BloodBank", bd.BD_UACC_ID);
 
                     Debug.Print(query);
                     bool x = db.InsertBloodBankLogs(query);
