@@ -37,7 +37,7 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
 
-                   
+
                     <li class="nav-item"><a class="nav-link" href="BB_Dashboard.aspx"><i class="fas fa-tachometer-alt" style="font-size: 20px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="BB_BloodTransaction.aspx"><i class="fa fa-tint" style="font-size: 20px;"></i><span style="font-size: 15px;">Blood Transaction</span></a></li>
 
@@ -55,8 +55,7 @@
                             <input class="form-control-plaintext" type="text" value="Dashboard" readonly="" style="font-size: 40px;">
                         </div>
                         <ul class="navbar-nav flex-nowrap ml-auto">
-                            
-                             <li class="nav-item dropdown no-arrow mx-1">
+                            <li class="nav-item dropdown no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow">
                                     <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
@@ -64,7 +63,7 @@
                                             <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
                                                 <asp:Repeater runat="server" ID="NotificationNavList">
                                                     <ItemTemplate>
-                                                        <a class="dropdown-item d-flex align-items-center" href="#">
+                                                        <a class="dropdown-item d-flex align-items-center" href="BB_Notification.aspx">
                                                             <div class="me-3">
                                                                 <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
                                                             </div>
@@ -76,11 +75,10 @@
                                                     </ItemTemplate>
                                                 </asp:Repeater>
                                             </div>
-                                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>
+                                        <a class="dropdown-item text-center small text-gray-500" href="BB_Notification.aspx">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
-
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown show no-arrow">
@@ -89,7 +87,7 @@
                                     <div class="dropdown-menu show shadow dropdown-menu-right animated--grow-in">
                                         <a class="dropdown-item" href="BB_Profile.aspx"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item"  runat="server" id="BtnLogout" autopostback="true" onserverclick="BtnLogout_ServerClick" ><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
+                                        <a class="dropdown-item" runat="server" id="BtnLogout" autopostback="true" onserverclick="BtnLogout_ServerClick"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
                                 </div>
                             </li>
@@ -174,14 +172,14 @@
                         </div>
                         <div class="card-footer text-muted">
                             <div runat="server" id="SurveyGroup" style="display: none;">
-                                <asp:Button runat="server" OnClick="ApproveSurveyBtn_Click" ID="ApproveSurveyBtn" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="button" Text="Approve Request Form" />
-                                <asp:Button runat="server" OnClick="RejectSurveyBtn_Click" ID="RejectSurveyBtn" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="button" Text="Reject Request Form" />
+                                <asp:Button runat="server" OnClick="ApproveSurveyBtn_Click" ID="ApproveSurveyBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Approve Request Form" />
+                                <asp:Button runat="server" OnClick="RejectSurveyBtn_Click" ID="RejectSurveyBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Reject Request Form" />
                             </div>
                             <div runat="server" id="BloodGroup" style="display: none;">
-                                <asp:Button runat="server" OnClick="ApproveBloodBtn_Click" ID="ApproveBloodBtn" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="button" Text="Approve Blood Transaction" />
-                                <asp:Button runat="server" OnClick="RejectBloodBtn_Click" ID="RejectBloodBtn" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="button" Text="Reject Blood Transaction" />
+                                <asp:Button runat="server" OnClick="ApproveBloodBtn_Click" ID="ApproveBloodBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Approve Blood Transaction" />
+                                <asp:Button runat="server" OnClick="RejectBloodBtn_Click" ID="RejectBloodBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Reject Blood Transaction" />
                             </div>
-                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);margin-top: 10px;" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true" />
+                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32); margin-top: 10px;" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true" />
                         </div>
                     </div>
                 </div>

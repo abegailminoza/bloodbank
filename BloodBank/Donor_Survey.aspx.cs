@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,6 +13,7 @@ namespace BloodBank
 {
     public partial class Donor_Survey : System.Web.UI.Page
     {
+        private Database_Connections db = new Database_Connections();
         protected void Page_Load(object sender, EventArgs e)
         {
             DonorSurvey ds = JsonConvert.DeserializeObject<DonorSurvey>("{\"personalInfo\":{\"PanelName\":\"asfdasf\",\"DonorName\":\"safa\",\"FamilyName\":\"sadfs\",\"FirstName\":\"dsgse\",\"Title\":\"estrwg\",\"IDNo\":\"dsges\",\"DateOfBirth\":\"2023-01-14\",\"Gender\":\"dsfwecs dasd \",\"Occupation\":\"sadasd\",\"ResidentialAddress\":\"asrwq\",\"PostalAddress\":\"wrwer\",\"Home\":\"13214\",\"Work\":\"2141254\",\"Mobile\":\"4356436\",\"EmailAddress\":\"bdeadsd\"},\"healthAssessment\":{\"N11\":\"yes\",\"N12\":\"yes\",\"N13\":\"yes\",\"N14\":\"yes\",\"N15\":\"yes\",\"N16a\":\"yes\",\"N16b\":\"yes\",\"N16c\":\"yes\",\"N16d\":null,\"N17\":\"yes\",\"N18a\":\"yes\",\"N18b\":\"yes\",\"N19a\":\"yes\",\"N19b\":\"yes\",\"N19c\":\"yes\",\"N110\":\"yes\",\"N111\":\"yes\",\"N112\":\"yes\",\"N113\":\"yes\",\"N114a\":\"yes\",\"N114b\":\"yes\",\"N115\":\"sdasdn\"},\"riskAssessment\":{\"N21\":\"yes\",\"N22\":\"yes\",\"N23\":\"voluntary,\",\"N24\":\"yes\",\"N25\":\"yes\",\"N26\":\"yes\",\"N27a\":\"yes\",\"N27b\":\"yes\",\"N27c\":\"yes\",\"N28\":\"yes\",\"N29\":\"yes\",\"N210\":\"yes\",\"N211\":\"yes\"}}");
@@ -173,6 +175,54 @@ namespace BloodBank
             Session.Clear();
             Session.RemoveAll();
             Server.Transfer("~/Default.aspx");
+        }
+
+
+        private void GetUnreadNotif()
+        {
+            bloodbank bb = Session["bloodbank"] as bloodbank;
+
+            //Get Unread COunt
+            string query = string.Format(@"select count(*) from notifications where NTF_RECEIVER_ID={0} and NTF_STATUS=false;", bb.BB_ID);
+            int count = db.GetUnreadNotificationCount(query);
+
+            if (count <= 9)
+            {
+                UnreadCount.InnerText = count.ToString();
+            }
+            else
+            {
+                UnreadCount.InnerText = "9+";
+            }
+            Debug.Print("Unread Count : " + count);
+
+            query = string.Format(@"select * from notifications where NTF_RECEIVER_ID={0} order by NTF_STATUS, NTF_DATE desc", bb.BB_ID);
+            List<notifications> nList = db.GetNotifications(query);
+            if (nList != null && nList[0].NTF_ID != null)
+            {
+                List<notifications> unread = nList.Where(x => x.NTF_STATUS == false).Select(g => g).ToList();
+                if (unread != null)
+                {
+                    int rows = 0;
+                    if (count > 5)
+                    {
+                        rows = 5;
+                    }
+                    else
+                    {
+                        rows = unread.Count;
+                    }
+                    List<notifications> newUnread = new List<notifications>();
+                    for (int i = 0; i < rows; i++)
+                    {
+                        newUnread.Add(unread[i]);
+                    }
+
+                    NotificationNavList.DataSource = null;
+                    NotificationNavList.DataSource = newUnread;
+                    NotificationNavList.DataBind();
+                }
+            }
         }
     }
 }

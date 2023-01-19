@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BB_Profile.aspx.cs" Inherits="BloodBank.BB_Profile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BB_Notification.aspx.cs" Inherits="BloodBank.BB_Notification" %>
 
 <!DOCTYPE html>
 
@@ -7,7 +7,7 @@
     <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>BloodBank Profile</title>
+    <title>Notification</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans" />
@@ -36,7 +36,7 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="BB_Dashboard.aspx"><i class="fas fa-tachometer-alt" style="font-size: 20px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="BB_Dashboard.aspx"><i class="fas fa-tachometer-alt" style="font-size: 20px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="BB_BloodTransaction.aspx"><i class="fa fa-tint" style="font-size: 20px;"></i><span style="font-size: 15px;">Blood Transaction</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="BB_ActionLogs.aspx"><i class="fa fa-list-ul" style="font-size: 20px;"></i><span style="font-size: 15px;">Action Logs</span></a></li>
                 </ul>
@@ -52,39 +52,41 @@
                             <input class="form-control-plaintext" type="text" value="Dashboard" readonly="" style="font-size: 40px;">
                         </div>
                         <ul class="navbar-nav flex-nowrap ml-auto">
-                            <li class="nav-item dropdown no-arrow mx-1">
+                            <li class="nav-item dropdown show no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow">
                                     <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
                                         <h6 class="dropdown-header" style="background: rgb(119,40,32);">NOTIFICATIONS</h6>
-                                            <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
-                                                <asp:Repeater runat="server" ID="NotificationNavList">
-                                                    <ItemTemplate>
-                                                        <a class="dropdown-item d-flex align-items-center" href="BB_Notification.aspx">
-                                                            <div class="me-3">
-                                                                <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
-                                                            </div>
-                                                            <div>
-                                                                <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
-                                                                <p><%# Eval("NTF_SUBJECT") %></p>
-                                                            </div>
-                                                            </a>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                            </div>
+                                        <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
+                                            <asp:Repeater runat="server" ID="NotificationNavList">
+                                                <ItemTemplate>
+                                                    <a class="dropdown-item d-flex align-items-center" href="BB_Notification.aspx">
+                                                        <div class="me-3">
+                                                            <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
+                                                        </div>
+                                                        <div>
+                                                            <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
+                                                            <p><%# Eval("NTF_SUBJECT") %></p>
+                                                        </div>
+                                                    </a>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </div>
                                         <a class="dropdown-item text-center small text-gray-500" href="BB_Notification.aspx">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown show no-arrow">
-                                    <a class="dropdown-toggle nav-link" aria-expanded="true" data-toggle="dropdown" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small" runat="server" id="username"></span>
+
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small" runat="server" id="username"></span>
                                         <img class="border rounded-circle img-profile" src="assets/img/user.png" /></a>
                                     <div class="dropdown-menu show shadow dropdown-menu-right animated--grow-in">
                                         <a class="dropdown-item" href="BB_Profile.aspx"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" runat="server" id="BtnLogout" autopostback="true" onserverclick="BtnLogout_ServerClick"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
+
                                     </div>
                                 </div>
                             </li>
@@ -92,33 +94,41 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <div class="col">
-                        <div class="card shadow mb-3">
-                            <div class="card-header py-3">
-                                <p class="text-primary m-0 font-weight-bold">Your Profile Information</p>
+                    <div class="row" style="margin-left: -116px;padding-left: 118px;">
+                        <div class="col-md-12 col-xxl-5 search-table-col"><span class="counter pull-right"></span>
+                            <div class="table-responsive table table-hover table-bordered results">
+                                <table class="table table-hover table-bordered">
+                                    <thead class="bill-header cs">
+                                        <tr>
+                                            <th id="trs-hd-2" class="col-lg-2" style="width: 124.7188px;">Id</th>
+                                            <th id="trs-hd-3" class="col-lg-3" style="width: 169.078px;">Subject</th>
+                                            <th id="trs-hd-4" class="col-lg-2" style="width: 131.7188px;">Date</th>
+                                            <th id="trs-hd-6" class="col-lg-2" style="width: 119.7188px;">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="warning no-result">
+                                            <td colspan="12"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
+                                        </tr>
+                                        <tr>
+                                            <td>01</td>
+                                            <td>India</td>
+                                            <td>Souvik Kundu</td>
+                                            <td>2014</td>
+                                            <td><button class="btn btn-success" style="margin-left: 5px;background: rgb(119,40,32);" type="submit"><i class="far fa-paper-plane" style="font-size: 15px;border-color: rgb(244,237,237);color: rgb(247,241,241);"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="card-body">
-                                <div>
-                                    <div class="form-row d-flex flex-column justify-content-xl-center align-items-xl-center">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="username"><strong>Username</strong></label><input runat="server" class="form-control" type="text" id="Profile_Username" placeholder="user.name" name="username" readonly="" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="email"><strong>New Password</strong></label><input runat="server" class="form-control" type="password" id="Profile_NPassword" placeholder="New Password" name="email" />
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="email"><strong>Confirm Old Password</strong></label><input runat="server" class="form-control" type="password" id="Profile_OPassword" placeholder="Old Password" name="email" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <asp:Button Class="btn btn-primary btn-block btn-lg btn-signin" runat="server" ID="UpdateInfo" OnClick="UpdateInfo_Click" type="Confirm" Style="background: rgb(119,40,32);" Text="Update Information" />
-                                    </div>
+                        </div>
+                        <div class="col-md-6 col-xxl-5">
+                            <div class="card" style="width: 80rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25);margin: 28px;min-width: 280px;max-width: 300px;margin-bottom: 20px;height: 443px;">
+                                <div class="card-body d-flex flex-column" style="height: 434px;width: 98%;">
+                                    <div>
+                                        <h4 style="font-family: 'Source Sans Pro', sans-serif;font-weight: 700;color: rgb(255,160,0);">Notification</h4>
+                                        <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Subject</h6>
+                                    </div><input type="text">
+                                    <p>Message</p><textarea style="height: 256px;width: 251px;"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -130,6 +140,8 @@
     </form>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/chart.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/login-full-page-bs4.js"></script>
     <script src="assets/js/login-full-page-bs4-1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>

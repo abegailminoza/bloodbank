@@ -183,6 +183,7 @@
     <Content Include="BB_ActionLogs.aspx" />
     <Content Include="BB_BloodTransaction.aspx" />
     <Content Include="BB_Dashboard.aspx" />
+    <Content Include="BB_Notification.aspx" />
     <Content Include="BB_Profile.aspx" />
     <Content Include="BB_Request_Survey.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -281,6 +282,13 @@
     </Compile>
     <Compile Include="BB_Dashboard.aspx.designer.cs">
       <DependentUpon>BB_Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BB_Notification.aspx.cs">
+      <DependentUpon>BB_Notification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BB_Notification.aspx.designer.cs">
+      <DependentUpon>BB_Notification.aspx</DependentUpon>
     </Compile>
     <Compile Include="BB_Profile.aspx.cs">
       <DependentUpon>BB_Profile.aspx</DependentUpon>

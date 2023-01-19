@@ -297,6 +297,61 @@ namespace BloodBank.Database
             return res;
         }
 
+
+        //Get Notification in List
+        public List<notifications> GetNotifications(string query)
+        {
+            List<notifications> nList = new List<notifications>();
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = query;
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read() && !rdr.IsDBNull(0))
+                {
+                    notifications n = new notifications();
+                    n.NTF_ID = rdr["NTF_ID"].ToString();
+                    n.NTF_SUBJECT = rdr["NTF_SUBJECT"].ToString();
+                    n.NTF_MESSAGE = rdr["NTF_MESSAGE"].ToString();
+                    n.NTF_SENDER_ID = rdr["NTF_SENDER_ID"].ToString();
+                    n.NTF_RECEIVER_ID = rdr["NTF_RECEIVER_ID"].ToString();
+                    n.NTF_STATUS = Convert.ToBoolean(rdr["NTF_STATUS"]);
+                    n.NTF_DATE = rdr["NTF_DATE"].ToString();
+                    nList.Add(n);
+                }
+                rdr.Close();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Get Notification List error : " + ex.Message);
+            }
+            return nList;
+        }
+
+        //Get Notification Unread count
+        public int GetUnreadNotificationCount(string query)
+        {
+            int res = -1;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                cmd.CommandText = query;
+                res = Convert.ToInt32(cmd.ExecuteScalar());
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Get Unread Notification COunt Error : " + ex.Message);
+            }
+            return res;
+        }
+
+
         //Insert into Notification Table
         public bool InsertToNotification(string query)
         {
