@@ -92,14 +92,14 @@ namespace BloodBank.Database
         }
     }
     [Serializable]
-    public class notification
+    public class notifications
     {
         public string NTF_ID { get; set; }
         public string NTF_SUBJECT { get; set; }
         public string NTF_MESSAGE { get; set; }
         public string NTF_RECEIVER_ID { get; set; }
         public string NTF_SENDER_ID { get; set; }
-        public string NTF_STATUS { get; set; }
+        public bool NTF_STATUS { get; set; }
         public string NTF_DATE { get; set; }
     }
 
