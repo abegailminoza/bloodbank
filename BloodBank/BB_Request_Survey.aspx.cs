@@ -1,4 +1,5 @@
 ﻿using BloodBank.Database;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -102,13 +103,14 @@ namespace BloodBank
             blood_request br = Session["BloodRequest"] as blood_request;
             bloodbank bb = Session["bloodbank"] as bloodbank;
             string query = "";
-
+            DateTime vDate = DateTime.Now.AddDays(2);
             if (res)
             {
-                query = string.Format(@"update blood_request set BREQ_SURVEY_STATUS={0} where BREQ_ID={1}", res, br.BREQ_ID);
-                if(db.UpdateBloodRequestStatus(query))
+                query = string.Format(@"update blood_request set BREQ_SURVEY_STATUS={0}, BREQ_VISIT_DATE='{1}' where BREQ_ID={2}", res, vDate, br.BREQ_ID);
+                Debug.Print(query);
+                if (db.UpdateBloodRequestStatus(query))
                 {
-                    //Create Login Logs
+                    //Create Logs
                     string description = string.Format("{0} Accepted User {1} ( ",bb.BB_USERNAME, br.BREQ_UACC_ID);
                     query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
                                             select concat('{0}', UACC_FIRST, ' ', UACC_LAST, ') Initial Blood Request Form'), {1}, '{2}' from user_account
@@ -119,6 +121,26 @@ namespace BloodBank
                     if (!x)
                     {
                         Debug.Print("BloodBank Logs Not Inserted");
+                    }
+
+                    //Send Notification
+                    string sbj = "Blood Request Form Accepted";
+                    string msg = MySqlHelper.EscapeString(string.Format(@"Your Request ID {0}
+Your request has been approved you may now proceed to claim your request.
+                                                    
+Please bring the following with you:
+Any valid ID
+Doctor's consent for blood bag request with Doctor's name and signature
+Ice bucket filled with ice
+Processing fee: P1,500.00
+                                                    
+*Please keep in mind that you can only claim your request until the following date: {1}
+*Note: Show your Request ID to the bloodbank.", br.BREQ_ID, vDate));
+                    query = string.Format(@"insert into notifications(NTF_SUBJECT, NTF_MESSAGE, NTF_RECEIVER_ID, NTF_SENDER_ID) 
+                                                values('{0}', '{1}', {2}, {3})", sbj, msg, br.BREQ_UACC_ID, bb.BB_ID);
+                    if(!db.InsertToNotification(query))
+                    {
+                        Debug.Print("Notification was not sent.");
                     }
 
                     //Success
@@ -146,6 +168,18 @@ namespace BloodBank
                     {
                         Debug.Print("BloodBank Logs Not Inserted");
                     }
+
+                    //Send Notification
+                    string sbj = "Blood Request Form Rejected";
+                    string msg = string.Format(@"Your Request ID {0}
+Your request has been rejected.", br.BREQ_ID);
+                    query = string.Format(@"insert into notifications(NTF_SUBJECT, NTF_MESSAGE, NTF_RECEIVER_ID, NTF_SENDER_ID) 
+                                                values('{0}', '{1}', {2}, {3})", sbj, msg, br.BREQ_UACC_ID, bb.BB_ID);
+                    if (!db.InsertToNotification(query))
+                    {
+                        Debug.Print("Notification was not sent.");
+                    }
+
                     //Success
                     Response.Write(string.Format("<script>alert('User {0} blood request survey was successfully rejected.')</script>", br.BREQ_UACC_ID));
 
@@ -153,6 +187,7 @@ namespace BloodBank
                     BloodGroup.Style.Add("display", "none");
                 }
             }
+
         }
 
         protected void ApproveBloodBtn_Click(object sender, EventArgs e)

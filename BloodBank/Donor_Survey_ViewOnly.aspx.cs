@@ -1,4 +1,5 @@
 ﻿using BloodBank.Database;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -204,10 +205,10 @@ namespace BloodBank
             blood_donation bd = Session["BloodDonation"] as blood_donation;
             bloodbank bb = Session["bloodbank"] as bloodbank;
             string query = "";
-
+            DateTime vDate = DateTime.Now.AddDays(2);
             if (res)
             {
-                query = string.Format(@"update blood_donation set BD_SURVEY_STATUS={0} where BD_ID={1}", res, bd.BD_ID);
+                query = string.Format(@"update blood_donation set BD_SURVEY_STATUS={0}, BD_VISIT_DATE='{1}' where BD_ID={2}", res, vDate, bd.BD_ID);
                 if (db.UpdateBloodRequestStatus(query))
                 {
                     //Create Login Logs
@@ -222,6 +223,23 @@ namespace BloodBank
                     if (!x)
                     {
                         Debug.Print("BloodBank Logs Not Inserted");
+                    }
+
+                    //Send Notification
+                    string sbj = "Blood Donation Form Accepted";
+                    string msg = MySqlHelper.EscapeString(string.Format(@"Your Request ID {0}
+Your request has been approved you may now proceed to claim your request.
+                                                    
+Your request has been approved you may now proceed to donate.
+Please bring the following with you: {1}
+Any valid ID
+
+*Note: Show your Request ID to the bloodbank.", bd.BD_ID, vDate));
+                    query = string.Format(@"insert into notifications(NTF_SUBJECT, NTF_MESSAGE, NTF_RECEIVER_ID, NTF_SENDER_ID) 
+                                                values('{0}', '{1}', {2}, {3})", sbj, msg, bd.BD_UACC_ID, bb.BB_ID);
+                    if (!db.InsertToNotification(query))
+                    {
+                        Debug.Print("Notification was not sent.");
                     }
 
                     //Success
@@ -248,6 +266,18 @@ namespace BloodBank
                     {
                         Debug.Print("BloodBank Logs Not Inserted");
                     }
+
+                    //Send Notification
+                    string sbj = "Blood Donation Form Accepted";
+                    string msg = MySqlHelper.EscapeString(string.Format(@"Your Request ID {0}
+Your request has been rejected", bd.BD_ID));
+                    query = string.Format(@"insert into notifications(NTF_SUBJECT, NTF_MESSAGE, NTF_RECEIVER_ID, NTF_SENDER_ID) 
+                                                values('{0}', '{1}', {2}, {3})", sbj, msg, bd.BD_UACC_ID, bb.BB_ID);
+                    if (!db.InsertToNotification(query))
+                    {
+                        Debug.Print("Notification was not sent.");
+                    }
+
                     //Success
                     Response.Write(string.Format("<script>alert('User {0} blood request survey was successfully rejected.')</script>", bd.BD_UACC_ID));
 
