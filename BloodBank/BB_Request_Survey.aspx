@@ -181,14 +181,10 @@
                                 <asp:Button runat="server" OnClick="ApproveBloodBtn_Click" ID="ApproveBloodBtn" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="button" Text="Approve Blood Transaction" />
                                 <asp:Button runat="server" OnClick="RejectBloodBtn_Click" ID="RejectBloodBtn" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);" type="button" Text="Reject Blood Transaction" />
                             </div>
+                            <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);margin-top: 10px;" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true" />
                         </div>
                     </div>
                 </div>
-                <div style="justify-content: center; align-items: center;">
-                     <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" style="background: rgb(119,40,32);margin-top: 10px;" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true" />
-                 
-                </div>
-                   
             </div>
         </div>
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
