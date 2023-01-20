@@ -30,7 +30,7 @@
     <form runat="server" id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(119,40,32);">
             <div class="container-fluid d-flex flex-column p-0">
-                <img style="font-size: 12px; line-height: 23px; border-width: -14px; height: 97px;" src="assets/img/vsmmclogo1.png"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <img style="font-size: 12px; line-height: 23px; border-width: -14px; height: 97px; margin-top:35px;" src="assets/img/vsmmclogo1.png"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-icon rotate-n-15"></div>
                     <div class="sidebar-brand-text mx-3"><span style="font-size: 30px;">VSMMC</span></div>
                 </a>
@@ -84,7 +84,7 @@
                                     <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small" runat="server" id="username"></span>
                                         <img class="border rounded-circle img-profile" src="assets/img/user.png" /></a>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                                        <a class="dropdown-item" href="BB_Profile.aspx"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
+                                        <a class="dropdown-item" href="BB_Profile.aspx"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Update Password</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" runat="server" id="BtnLogout" autopostback="true" onserverclick="BtnLogout_ServerClick"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
 
@@ -96,9 +96,14 @@
                     </div>
                 </nav>
 
-                 <div class="container-fluid" >
-                    <div class="row" >
-                        <div class="col-8">
+                 <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <p></p>
+                                </div>
+                                
                                 <div class="card-body">
                                     <h3 runat="server" id="NoDataMsg" style="display: none;">No Data</h3>
                                     <div runat="server" id="TableContainer" style="max-height: 450px">
@@ -112,13 +117,14 @@
                                                     <asp:BoundField HeaderText="DATE" DataField="NTF_DATE" />
                                                     
                                                     <asp:BoundField HeaderText="" DataField="NTF_STATUS" />
+                                                    <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="btn-danger" />
                                                 </Columns>
                                             </asp:GridView>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                            </div>
                         <div class="col-4">
                             <div class="card" style="width: 80rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25);margin: 28px;min-width: 280px;max-width: 500px;margin-bottom: 20px;height: 443px;">
                                 <div class="card-body d-flex flex-column" style="height: 600px;width: 98%;">

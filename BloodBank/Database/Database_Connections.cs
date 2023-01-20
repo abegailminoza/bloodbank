@@ -123,7 +123,7 @@ namespace BloodBank.Database
                 con.Open();
                 cmd = con.CreateCommand();
                 //Check Old Password 
-                cmd.CommandText = string.Format("select count(*) as CountRow from bloodbank where binary BB_USERNAME='{0}' and binary BB_PASSWORD='{1}';", uname, opword);
+                cmd.CommandText = string.Format("select count(*) from bloodbank where binary BB_USERNAME='{0}' and binary BB_PASSWORD='{1}';", uname, opword);
                 int check = Convert.ToInt32(cmd.ExecuteScalar());
                 if(check >= 1)
                 {

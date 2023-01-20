@@ -30,7 +30,7 @@
     <form runat="server" id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(119,40,32);">
             <div class="container-fluid d-flex flex-column p-0">
-                <img style="font-size: 12px; line-height: 23px; border-width: -14px; height: 97px;" src="assets/img/vsmmclogo1.png"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <img style="font-size: 12px; line-height: 23px; border-width: -14px; height: 97px; margin-top:35px;" src="assets/img/vsmmclogo1.png"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-icon rotate-n-15"></div>
                     <div class="sidebar-brand-text mx-3"><span style="font-size: 30px;">VSMMC</span></div>
                 </a>
@@ -82,7 +82,7 @@
                                     <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small" runat="server" id="username"></span>
                                         <img class="border rounded-circle img-profile" src="assets/img/user.png" /></a>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                                        <a class="dropdown-item" href="BB_Profile.aspx"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
+                                        <a class="dropdown-item" href="BB_Profile.aspx"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Update Password</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" runat="server" id="BtnLogout" autopostback="true" onserverclick="BtnLogout_ServerClick"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
 
@@ -121,7 +121,7 @@
                                                         <div class="col">
                                                             <div class="card" style="width: 100%;">
                                                                 <div class="card-header" style="padding: 0px; padding-top: 9px; background: var(--red);">
-                                                                    <h5 class="text-center" style="font-weight: bold; color: var(--white);">REQUESTOR</h5>
+                                                                    <h5 class="text-center" style="font-weight: bold; color: var(--white);">REQUESTER</h5>
                                                                 </div>
                                                                 <div class="card-body" style="width: 100%;">
                                                                     <div class="row">
@@ -177,7 +177,7 @@
                                                         <div class="col">
                                                             <div class="card" style="width: 100%;">
                                                                 <div class="card-header" style="padding: 0px; padding-top: 9px; background: #25476a;">
-                                                                    <h5 class="text-center" style="font-weight: bold; color: var(--white);">REQUESTS</h5>
+                                                                    <h5 class="text-center" style="font-weight: bold; color: var(--white);">REQUESTS(BLOOD)</h5>
                                                                 </div>
                                                                 <div class="card-body" style="width: 100%;">
                                                                     <div class="row">
@@ -193,7 +193,7 @@
                                                         <div class="col">
                                                             <div class="card" style="width: 100%;">
                                                                 <div class="card-header" style="padding: 0px; padding-top: 9px; background: #25476a;">
-                                                                    <h5 class="text-center" style="font-weight: bold; color: var(--white);">DONATIONS</h5>
+                                                                    <h5 class="text-center" style="font-weight: bold; color: var(--white);">REQUESTS(DONOR)</h5>
                                                                 </div>
                                                                 <div class="card-body" style="width: 100%;">
                                                                     <div class="row">
