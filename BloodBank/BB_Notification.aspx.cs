@@ -1,11 +1,13 @@
 ﻿using BloodBank.Database;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 
 namespace BloodBank
 {
@@ -25,9 +27,30 @@ namespace BloodBank
                 //Set Username
                 username.InnerText = bb.BB_USERNAME;
                 GetUnreadNotif();
+                PopulateNotificationGridView();
             }
         }
+        public void PopulateNotificationGridView()
+        {
+            bloodbank ua= Session["bloodbank"] as bloodbank;
 
+
+            DataTable data = db.GetNotificationTableData(ua);
+
+            if (data != null)
+            {
+                NoDataMsg.Attributes.Add("display", "none");
+                TableContainer.Attributes.Add("display", "");
+                NotificationGrid.DataSource = null;
+                NotificationGrid.DataSource = data;
+                NotificationGrid.DataBind();
+            }
+            else
+            {
+                NoDataMsg.Attributes.Add("display", "");
+                TableContainer.Attributes.Add("display", "none");
+            }
+        }
         protected void BtnLogout_ServerClick(object sender, EventArgs e)
         {
             Session.Clear();

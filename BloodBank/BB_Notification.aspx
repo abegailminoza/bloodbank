@@ -49,40 +49,41 @@
                     <div class="container-fluid">
                         <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <div class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <input class="form-control-plaintext" type="text" value="Dashboard" readonly="" style="font-size: 40px;">
+                            <input class="form-control-plaintext" type="text" value="Notifications" readonly="" style="font-size: 40px;">
                         </div>
-                        <ul class="navbar-nav flex-nowrap ml-auto">
+                         <ul class="navbar-nav flex-nowrap ml-auto">
                             <li class="nav-item dropdown show no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow">
-                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
+                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">
+                                        <span class="badge badge-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
                                         <h6 class="dropdown-header" style="background: rgb(119,40,32);">NOTIFICATIONS</h6>
-                                        <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
-                                            <asp:Repeater runat="server" ID="NotificationNavList">
-                                                <ItemTemplate>
-                                                    <a class="dropdown-item d-flex align-items-center" href="BB_Notification.aspx">
-                                                        <div class="me-3">
-                                                            <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
-                                                        </div>
-                                                        <div>
-                                                            <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
-                                                            <p><%# Eval("NTF_SUBJECT") %></p>
-                                                        </div>
-                                                    </a>
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                        </div>
+                                            <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
+                                                <asp:Repeater runat="server" ID="NotificationNavList">
+                                                    <ItemTemplate>
+                                                        <a class="dropdown-item d-flex align-items-center" href="BB_Notification.aspx">
+                                                            <div class="me-3">
+                                                                <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
+                                                            </div>
+                                                            <div>
+                                                                <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
+                                                                <p><%# Eval("NTF_SUBJECT") %></p>
+                                                            </div>
+                                                            </a>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </div>
                                         <a class="dropdown-item text-center small text-gray-500" href="BB_Notification.aspx">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
-                            <li class="nav-item dropdown no-arrow">
 
+                            <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow">
                                     <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small" runat="server" id="username"></span>
                                         <img class="border rounded-circle img-profile" src="assets/img/user.png" /></a>
-                                    <div class="dropdown-menu show shadow dropdown-menu-right animated--grow-in">
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
                                         <a class="dropdown-item" href="BB_Profile.aspx"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" runat="server" id="BtnLogout" autopostback="true" onserverclick="BtnLogout_ServerClick"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
@@ -90,51 +91,57 @@
                                     </div>
                                 </div>
                             </li>
+
                         </ul>
                     </div>
                 </nav>
-                <div class="container-fluid">
-                    <div class="row" style="margin-left: -116px;padding-left: 118px;">
-                        <div class="col-md-12 col-xxl-5 search-table-col"><span class="counter pull-right"></span>
-                            <div class="table-responsive table table-hover table-bordered results">
-                                <table class="table table-hover table-bordered">
-                                    <thead class="bill-header cs">
-                                        <tr>
-                                            <th id="trs-hd-2" class="col-lg-2" style="width: 124.7188px;">Id</th>
-                                            <th id="trs-hd-3" class="col-lg-3" style="width: 169.078px;">Subject</th>
-                                            <th id="trs-hd-4" class="col-lg-2" style="width: 131.7188px;">Date</th>
-                                            <th id="trs-hd-6" class="col-lg-2" style="width: 119.7188px;">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="warning no-result">
-                                            <td colspan="12"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
-                                        </tr>
-                                        <tr>
-                                            <td>01</td>
-                                            <td>India</td>
-                                            <td>Souvik Kundu</td>
-                                            <td>2014</td>
-                                            <td><button class="btn btn-success" style="margin-left: 5px;background: rgb(119,40,32);" type="submit"><i class="far fa-paper-plane" style="font-size: 15px;border-color: rgb(244,237,237);color: rgb(247,241,241);"></i></button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
+                 <div class="container-fluid" >
+                    <div class="row" >
+                        <div class="col-8">
+                                <div class="card-body">
+                                    <h3 runat="server" id="NoDataMsg" style="display: none;">No Data</h3>
+                                    <div runat="server" id="TableContainer" style="max-height: 450px">
+                                        <div id="VerticalScroll" style="overflow: auto; max-height: inherit;">
+                                            <asp:GridView runat="server" ID="NotificationGrid" Visible="true" AutoGenerateColumns="false" Width="100%"
+                                                BorderColor="Transparent" AutoPostBack="false">
+                                                <RowStyle CssClass="grid-item-style  grid-font-style" />
+                                                <Columns>
+                                                    <asp:BoundField HeaderText="ID" DataField="NTF_ID" />
+                                                    <asp:BoundField HeaderText="SUBJECT" DataField="NTF_SUBJECT" />
+                                                    <asp:BoundField HeaderText="DATE" DataField="NTF_DATE" />
+                                                    
+                                                    <asp:BoundField HeaderText="" DataField="NTF_STATUS" />
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-xxl-5">
-                            <div class="card" style="width: 80rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25);margin: 28px;min-width: 280px;max-width: 300px;margin-bottom: 20px;height: 443px;">
-                                <div class="card-body d-flex flex-column" style="height: 434px;width: 98%;">
+
+                        <div class="col-4">
+                            <div class="card" style="width: 80rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25);margin: 28px;min-width: 280px;max-width: 500px;margin-bottom: 20px;height: 443px;">
+                                <div class="card-body d-flex flex-column" style="height: 600px;width: 98%;">
                                     <div>
                                         <h4 style="font-family: 'Source Sans Pro', sans-serif;font-weight: 700;color: rgb(255,160,0);">Notification</h4>
                                         <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Subject</h6>
-                                    </div><input type="text">
-                                    <p>Message</p><textarea style="height: 256px;width: 251px;"></textarea>
+                                    </div> <asp:TextBox runat="server" Class="form-control" type="text" ></asp:TextBox>
+                                     <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Message</h6>
+                                    <textarea class="form-control" style="height: 100%;"></textarea>
                                 </div>
                             </div>
                         </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
+
+
+             <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © TechySavor 2022</span></div>
+                </div>
+            </footer>
         </div>
         <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </form>
