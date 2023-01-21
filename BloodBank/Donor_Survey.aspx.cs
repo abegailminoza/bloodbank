@@ -27,6 +27,17 @@ namespace BloodBank
             //GetSurveyInputs();
         }
 
+        protected void NotificationNavList_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "ViewNotif")
+            {
+                string id = e.CommandArgument.ToString();
+                Session["IsViewing"] = true;
+                Session["NTF_ID"] = id;
+                Response.Redirect("~/BB_Notification.aspx");
+            }
+        }
+
         private void GetSurveyInputs()
         {
             DonorSurvey ds = new DonorSurvey();

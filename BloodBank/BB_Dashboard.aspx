@@ -30,7 +30,7 @@
     <form runat="server" id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(119,40,32);">
             <div class="container-fluid d-flex flex-column p-0">
-                <img style="font-size: 12px; line-height: 23px; border-width: -14px; height: 97px; margin-top:35px;" src="assets/img/vsmmclogo1.png"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <img style="font-size: 12px; line-height: 23px; border-width: -14px; height: 97px; margin-top: 35px;" src="assets/img/vsmmclogo1.png"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-icon rotate-n-15"></div>
                     <div class="sidebar-brand-text mx-3"><span style="font-size: 30px;">VSMMC</span></div>
                 </a>
@@ -49,35 +49,37 @@
                     <div class="container-fluid">
                         <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <div class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <input class="form-control-plaintext" type="text" value="Dashboard" readonly="" style="font-size: 40px;"></div>
+                            <input class="form-control-plaintext" type="text" value="Dashboard" readonly="" style="font-size: 40px;">
+                        </div>
                         <ul class="navbar-nav flex-nowrap ml-auto">
-                            <li class="nav-item dropdown show no-arrow mx-1">
+                            <li class="nav-item dropdown no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow">
-                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">
-                                        <span class="badge badge-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-start dropdown-list animated--grow-in">
+
+                                    <a class="dropdown-toggle nav-link dropleft" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+
                                         <h6 class="dropdown-header" style="background: rgb(119,40,32);">NOTIFICATIONS</h6>
-                                            <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
-                                                <asp:Repeater runat="server" ID="NotificationNavList">
-                                                    <ItemTemplate>
-                                                        <a class="dropdown-item d-flex align-items-center" href="BB_Notification.aspx">
-                                                            <div class="me-3">
-                                                                <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
-                                                            </div>
-                                                            <div>
-                                                                <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
-                                                                <p><%# Eval("NTF_SUBJECT") %></p>
-                                                            </div>
-                                                            </a>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                            </div>
+                                        <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
+                                            <asp:Repeater runat="server" ID="NotificationNavList" OnItemCommand="NotificationNavList_ItemCommand">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton runat="server" ID="ViewNotifBtn" CommandName="ViewNotif" CommandArgument='<%# Eval("NTF_ID") %>' CssClass="dropdown-item d-flex align-items-center">
+                                                        <div class="me-3">
+                                                            <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
+                                                        </div>
+                                                        <div>
+                                                            <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
+                                                            <p><%# Eval("NTF_SUBJECT") %></p>
+                                                        </div>
+                                                    </asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </div>
                                         <a class="dropdown-item text-center small text-gray-500" href="BB_Notification.aspx">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
-                              <li class="nav-item dropdown no-arrow">
+                            <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow">
                                     <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small" runat="server" id="username"></span>
                                         <img class="border rounded-circle img-profile" src="assets/img/user.png" /></a>
@@ -111,7 +113,8 @@
                                                                     <h1 runat="server" id="TotalNumberUser"></h1>
                                                                 </div>
                                                                 <div class="col-2 d-flex justify-content-xl-center align-items-xl-center">
-                                                                    <img src="assets/img/user.png" width="30"></div>
+                                                                    <img src="assets/img/user.png" width="30">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -129,7 +132,8 @@
                                                                             <h1 runat="server" id="NumberRequestor"></h1>
                                                                         </div>
                                                                         <div class="col-3 d-flex justify-content-xl-center align-items-xl-center">
-                                                                            <img src="assets/img/blood-drop.png" width="30"></div>
+                                                                            <img src="assets/img/blood-drop.png" width="30">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -145,7 +149,8 @@
                                                                             <h1 runat="server" id="NumberDonor"></h1>
                                                                         </div>
                                                                         <div class="col-3 d-flex justify-content-xl-center align-items-xl-center">
-                                                                            <img src="assets/img/blood-donation.png" width="30"></div>
+                                                                            <img src="assets/img/blood-donation.png" width="30">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -167,7 +172,8 @@
                                                                     <h1 runat="server" id="TotalNumberTransaction"></h1>
                                                                 </div>
                                                                 <div class="col-2 d-flex justify-content-xl-center align-items-xl-center">
-                                                                    <img src="assets/img/bill.png" width="30"></div>
+                                                                    <img src="assets/img/bill.png" width="30">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -185,7 +191,8 @@
                                                                             <h1 runat="server" id="NumberRequestTransaction"></h1>
                                                                         </div>
                                                                         <div class="col-3 d-flex justify-content-xl-center align-items-xl-center">
-                                                                            <img src="assets/img/blood-drop.png" width="30"></div>
+                                                                            <img src="assets/img/blood-drop.png" width="30">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -201,7 +208,8 @@
                                                                             <h1 runat="server" id="NumberDonationTransaction"></h1>
                                                                         </div>
                                                                         <div class="col-3 d-flex justify-content-xl-center align-items-xl-center">
-                                                                            <img src="assets/img/blood-donation.png" width="30"></div>
+                                                                            <img src="assets/img/blood-donation.png" width="30">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
