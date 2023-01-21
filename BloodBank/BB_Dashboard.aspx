@@ -223,7 +223,17 @@
                                 <div class="col-5">
                                     <div class="card d-flex">
                                         <div class="card-header" style="background: var(--red); padding: 0px; padding-top: 9px;">
-                                            <h3 class="text-center" style="font-weight: bold; color: var(--white);">Blood Transactions</h3>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h3 style="font-weight: bold; color: var(--white);">Blood <span runat="server" id="PieTitle"></span> Transactions</h3>
+                                                </div>
+                                                <div class="col-3">
+                                                    <asp:DropDownList runat="server" ID="PieOption" AutoPostBack="true" OnSelectedIndexChanged="PieOption_SelectedIndexChanged">
+                                                        <asp:ListItem Text="Blood Requests" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text="Blood Donations" Value="1"></asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="card-body">
                                             <div>
