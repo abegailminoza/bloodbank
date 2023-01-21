@@ -109,7 +109,7 @@
                                                 </ItemTemplate>
                                             </asp:Repeater>
                                         </div>
-                                        <a class="dropdown-item text-center small text-gray-500" href="USER_Notification.aspx">Show All Notifications</a>
+                                        <a class="dropdown-item text-center small text-gray-500" href="BB_Notification.aspx">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
