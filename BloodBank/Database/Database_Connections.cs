@@ -385,7 +385,7 @@ namespace BloodBank.Database
                 DB_Connect();
                 con.Open();
                 cmd = con.CreateCommand();
-                cmd.CommandText = string.Format(@"select * from notifications where NTF_RECEIVER_ID={0} and NTF_STATUS=false;", ua.BB_ID);
+                cmd.CommandText = string.Format("select NTF_ID, NTF_SUBJECT, NTF_DATE, if(NTF_STATUS=true, 'READ', 'UNREAD') as NTF_STATUS from notifications where NTF_RECEIVER_ID={0} order by NTF_STATUS desc, NTF_DATE desc;", ua.BB_ID);
                 da = new MySqlDataAdapter(cmd);
                 da.Fill(dt);
                 con.Close();
@@ -396,6 +396,71 @@ namespace BloodBank.Database
             }
             return dt;
         }
+
+
+
+        //Get Notification Details
+        public notifications SearchNotification(string id)
+        {
+            notifications res = new notifications();
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                Debug.Print(string.Format(@"select * from notifications where NTF_ID={0};", id));
+                cmd.CommandText = string.Format(@"select * from notifications where NTF_ID={0};", id);
+                rdr = cmd.ExecuteReader();
+                if (rdr.Read())
+                {
+                    if (!rdr.IsDBNull(0))
+                    {
+                        res.NTF_ID = rdr["NTF_ID"].ToString();
+                        res.NTF_SUBJECT = rdr["NTF_SUBJECT"].ToString();
+                        res.NTF_MESSAGE = rdr["NTF_MESSAGE"].ToString();
+                        res.NTF_SENDER_ID = rdr["NTF_SENDER_ID"].ToString();
+                        res.NTF_RECEIVER_ID = rdr["NTF_RECEIVER_ID"].ToString();
+                        res.NTF_STATUS = Convert.ToBoolean(rdr["NTF_STATUS"]);
+                        res.NTF_DATE = rdr["NTF_DATE"].ToString();
+                    }
+                }
+                rdr.Close();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Search Notification Error : " + ex.Message);
+            }
+            return res;
+        }
+
+        //Updat eNotification Status
+        public bool UpdateNotificationStatus(string id)
+        {
+            bool res = false;
+            try
+            {
+                DB_Connect();
+                con.Open();
+                cmd = con.CreateCommand();
+                Debug.Print(string.Format(@"update notifications set NTF_STATUS=true where NTF_ID={0};", id));
+                cmd.CommandText = string.Format(@"update notifications set NTF_STATUS=true where NTF_ID={0};", id);
+                int x = cmd.ExecuteNonQuery();
+                if (x > 0)
+                {
+                    Debug.Print("Success");
+                    res = false;
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("Update Notification Status Error : " + ex.Message);
+            }
+            return res;
+        }
+
+
 
     }
 }

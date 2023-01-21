@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -26,10 +27,33 @@ namespace BloodBank
                 bloodbank bb = Session["bloodbank"] as bloodbank;
                 //Set Username
                 username.InnerText = bb.BB_USERNAME;
+                if (Convert.ToBoolean(Session["IsViewing"]))
+                {
+                    ViewNotifWithID(Session["NTF_ID"].ToString());
+                }
+                else
+                {
+
+                    PopulateNotificationGridView();
+                }
+
                 GetUnreadNotif();
-                PopulateNotificationGridView();
             }
         }
+
+
+        protected void NotificationNavList_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "ViewNotif")
+            {
+                string id = e.CommandArgument.ToString();
+                Session["IsViewing"] = true;
+                Session["NTF_ID"] = id;
+                Response.Redirect("~/BB_Notification.aspx");
+            }
+        }
+
+
         public void PopulateNotificationGridView()
         {
             bloodbank ua= Session["bloodbank"] as bloodbank;
@@ -105,5 +129,63 @@ namespace BloodBank
                 }
             }
         }
+
+
+        protected void NotificationGrid_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = NotificationGrid.SelectedRow;
+            string id = row.Cells[0].Text;
+            notifications ntf = db.SearchNotification(id);
+
+            if (ntf != null)
+            {
+                if (ntf.NTF_SENDER_ID != null)
+                {
+                    NotificationDetails.Style.Add("display", "");
+                    Subject.Text = ntf.NTF_SUBJECT;
+                    Message.InnerText = ntf.NTF_MESSAGE;
+
+                    //Update Status
+                    if (!ntf.NTF_STATUS)
+                    {
+                        if (db.UpdateNotificationStatus(id))
+                        {
+                            Debug.Print("Success");
+                            GetUnreadNotif();
+                        }
+                        PopulateNotificationGridView();
+                    }
+                }
+            }
+        }
+
+        public void ViewNotifWithID(string id)
+        {
+            notifications ntf = db.SearchNotification(id);
+
+            if (ntf != null)
+            {
+                if (ntf.NTF_SENDER_ID != null)
+                {
+                    NotificationDetails.Style.Add("display", "");
+                    Subject.Text = ntf.NTF_SUBJECT;
+                    Message.InnerText = ntf.NTF_MESSAGE;
+
+                    //Update Status
+                    if (!ntf.NTF_STATUS)
+                    {
+                        if (db.UpdateNotificationStatus(id))
+                        {
+                            Debug.Print("Success");
+                        }
+                        PopulateNotificationGridView();
+                        GetUnreadNotif();
+                    }
+                }
+            }
+        }
+
+
+
     }
 }

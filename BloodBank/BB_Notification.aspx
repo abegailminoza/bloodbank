@@ -30,7 +30,7 @@
     <form runat="server" id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="background: rgb(119,40,32);">
             <div class="container-fluid d-flex flex-column p-0">
-                <img style="font-size: 12px; line-height: 23px; border-width: -14px; height: 97px; margin-top:35px;" src="assets/img/vsmmclogo1.png"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <img style="font-size: 12px; line-height: 23px; border-width: -14px; height: 97px; margin-top: 35px;" src="assets/img/vsmmclogo1.png"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-icon rotate-n-15"></div>
                     <div class="sidebar-brand-text mx-3"><span style="font-size: 30px;">VSMMC</span></div>
                 </a>
@@ -51,29 +51,28 @@
                         <div class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <input class="form-control-plaintext" type="text" value="Notifications" readonly="" style="font-size: 40px;">
                         </div>
-                         <ul class="navbar-nav flex-nowrap ml-auto">
-                            <li class="nav-item dropdown show no-arrow mx-1">
+                        <ul class="navbar-nav flex-nowrap ml-auto">
+                            <li class="nav-item dropdown no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow">
-                                    <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">
-                                        <span class="badge badge-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
+                                    <a class="dropdown-toggle nav-link dropleft" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
                                         <h6 class="dropdown-header" style="background: rgb(119,40,32);">NOTIFICATIONS</h6>
-                                            <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
-                                                <asp:Repeater runat="server" ID="NotificationNavList">
-                                                    <ItemTemplate>
-                                                        <a class="dropdown-item d-flex align-items-center" href="BB_Notification.aspx">
-                                                            <div class="me-3">
-                                                                <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
-                                                            </div>
-                                                            <div>
-                                                                <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
-                                                                <p><%# Eval("NTF_SUBJECT") %></p>
-                                                            </div>
-                                                            </a>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                            </div>
-                                        <a class="dropdown-item text-center small text-gray-500" href="BB_Notification.aspx">Show All Notifications</a>
+                                        <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
+                                            <asp:Repeater runat="server" ID="NotificationNavList" OnItemCommand="NotificationNavList_ItemCommand">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton runat="server" ID="ViewNotifBtn" CommandName="ViewNotif" CommandArgument='<%# Eval("NTF_ID") %>' CssClass="dropdown-item d-flex align-items-center">
+                                                        <div class="me-3">
+                                                            <div class="bg-primary icon-circle" style="background: var(--bs-indigo); border-color: var(--bs-blue);"><i class="fas fa-envelope-open text-white"></i></div>
+                                                        </div>
+                                                        <div>
+                                                            <span class="small text-gray-500"><%# Eval("NTF_DATE") %></span>
+                                                            <p><%# Eval("NTF_SUBJECT") %></p>
+                                                        </div>
+                                                    </asp:LinkButton>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </div>
+                                        <a class="dropdown-item text-center small text-gray-500" href="USER_Notification.aspx">Show All Notifications</a>
                                     </div>
                                 </div>
                             </li>
@@ -96,54 +95,53 @@
                     </div>
                 </nav>
 
-                 <div class="container-fluid">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-7">
                             <div class="card shadow">
                                 <div class="card-header py-3">
                                     <p></p>
                                 </div>
-                                
+
                                 <div class="card-body">
                                     <h3 runat="server" id="NoDataMsg" style="display: none;">No Data</h3>
                                     <div runat="server" id="TableContainer" style="max-height: 450px">
                                         <div id="VerticalScroll" style="overflow: auto; max-height: inherit;">
-                                            <asp:GridView runat="server" ID="NotificationGrid" Visible="true" AutoGenerateColumns="false" Width="100%"
-                                                BorderColor="Transparent" AutoPostBack="false">
+                                            <asp:GridView runat="server" ID="NotificationGrid" AutoGenerateColumns="false" Width="100%"
+                                                BorderColor="Transparent" AutoPostBack="true" OnSelectedIndexChanged="NotificationGrid_SelectedIndexChanged">
                                                 <RowStyle CssClass="grid-item-style  grid-font-style" />
                                                 <Columns>
                                                     <asp:BoundField HeaderText="ID" DataField="NTF_ID" />
                                                     <asp:BoundField HeaderText="SUBJECT" DataField="NTF_SUBJECT" />
                                                     <asp:BoundField HeaderText="DATE" DataField="NTF_DATE" />
-                                                    
-                                                    <asp:BoundField HeaderText="" DataField="NTF_STATUS" />
-                                                    <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="btn-danger" />
+                                                    <asp:BoundField HeaderText="STATUS" DataField="NTF_STATUS" />
+                                                    <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" />
                                                 </Columns>
                                             </asp:GridView>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            </div>
-                        <div class="col-4">
-                            <div class="card" style="width: 80rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25);margin: 28px;min-width: 280px;max-width: 500px;margin-bottom: 20px;height: 443px;">
-                                <div class="card-body d-flex flex-column" style="height: 600px;width: 98%;">
+                        </div>
+                        <div class="col-4" style="display: none;" runat="server" id="NotificationDetails">
+                            <div class="card" style="width: 80rem; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25); margin: 28px; min-width: 280px; max-width: 500px; margin-bottom: 20px; height: 443px;">
+                                <div class="card-body d-flex flex-column" style="height: 600px; width: 98%;">
                                     <div>
-                                        <h4 style="font-family: 'Source Sans Pro', sans-serif;font-weight: 700;color: rgb(255,160,0);">Notification</h4>
-                                        <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Subject</h6>
-                                    </div> <asp:TextBox runat="server" Class="form-control" type="text" ></asp:TextBox>
-                                     <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 600;color: #757575;">Message</h6>
-                                    <textarea class="form-control" style="height: 100%;"></textarea>
+                                        <h4 style="font-family: 'Source Sans Pro', sans-serif; font-weight: 700; color: rgb(255,160,0);">Notification</h4>
+                                        <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif; font-weight: 600; color: #757575;">Subject</h6>
+                                    </div>
+                                    <asp:TextBox runat="server" Class="form-control" type="text" Enabled="false" ID="Subject"></asp:TextBox>
+                                    <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif; font-weight: 600; color: #757575;">Message</h6>
+                                    <textarea class="form-control" style="height: 100%;" runat="server" id="Message" readonly=""></textarea>
                                 </div>
                             </div>
                         </div>
-
-                        </div>
                     </div>
                 </div>
+            </div>
 
 
-             <footer class="bg-white sticky-footer">
+            <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © TechySavor 2022</span></div>
                 </div>
