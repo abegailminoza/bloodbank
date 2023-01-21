@@ -66,25 +66,11 @@ namespace BloodBank
             query = @"select count(*) from blood_donation where (BD_SURVEY_STATUS = false or BD_BLOOD_STATUS = false) and BD_REQ_STATUS=true;";
             NumberDonationTransaction.InnerText = db.GetCount(query).ToString();
 
-            int[] transactions = new int[3];
-            string[] lbl = new string[3];
+            object sender = new object();
+            EventArgs e = new EventArgs();
+            PieOption_SelectedIndexChanged(sender, e);
 
-            lbl[0] = "Approved";
-            lbl[1] = "Rejected";
-            lbl[2] = "Pending";
 
-            query = @"select ((select count(*) from blood_request where (BREQ_SURVEY_STATUS = true and BREQ_BLOOD_STATUS = true) and BREQ_REQ_STATUS=true) 
-                    + (select count(*) from blood_donation where (BD_SURVEY_STATUS = true and BD_BLOOD_STATUS = true) and BD_REQ_STATUS=true)) as Total;";
-            transactions[0] = db.GetCount(query);
-
-            query = @"select ((select count(*) from blood_request where BREQ_REQ_STATUS=false) 
-                    + (select count(*) from blood_donation where BD_REQ_STATUS=false)) as Total;";
-            transactions[1] = db.GetCount(query);
-
-            transactions[2] = Convert.ToInt32(TotalNumberTransaction.InnerText);
-
-            Labels = lbl;
-            Data = transactions;
         }
 
         protected void BtnLogout_ServerClick(object sender, EventArgs e)
@@ -140,6 +126,48 @@ namespace BloodBank
                     NotificationNavList.DataBind();
                 }
             }
+        }
+
+        protected void PieOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int[] transactions = new int[3];
+            string[] lbl = new string[3];
+            string query = "";
+
+            lbl[0] = "Completed";
+            lbl[1] = "Rejected";
+            lbl[2] = "Pending";
+
+            switch (PieOption.SelectedValue)
+            {
+                case "0":
+                    //Blood Requests
+                    PieTitle.InnerText = "Requests";
+                    query = @"select count(*) as Total from blood_request where (BREQ_SURVEY_STATUS = true and BREQ_BLOOD_STATUS = true) and BREQ_REQ_STATUS=true;";
+                    transactions[0] = db.GetCount(query);
+
+                    query = @"select count(*) as Total from blood_request where BREQ_REQ_STATUS=false;";
+                    transactions[1] = db.GetCount(query);
+
+                    query = @"select count(*) as Total from blood_request where (BREQ_SURVEY_STATUS = false or BREQ_BLOOD_STATUS = false) and BREQ_REQ_STATUS=true;";
+                    transactions[2] = db.GetCount(query);
+                    break;
+                case "1":
+                    //Blood Donations
+                    PieTitle.InnerText = "Donations";
+                    query = @"select count(*) as Total from blood_donation where (BD_SURVEY_STATUS = true and BD_BLOOD_STATUS = true) and BD_REQ_STATUS=true;";
+                    transactions[0] = db.GetCount(query);
+
+                    query = @"select count(*) as Total from blood_donation where BD_REQ_STATUS=false;";
+                    transactions[1] = db.GetCount(query);
+
+                    query = @"select count(*) as Total from blood_donation where (BD_SURVEY_STATUS = false or BD_BLOOD_STATUS = false) and BD_REQ_STATUS=true;";
+                    transactions[2] = db.GetCount(query);
+                    break;
+            }
+
+            Labels = lbl;
+            Data = transactions;
         }
     }
 }
