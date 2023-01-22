@@ -115,7 +115,7 @@
                                                     <asp:BoundField HeaderText="SUBJECT" DataField="NTF_SUBJECT" />
                                                     <asp:BoundField HeaderText="DATE" DataField="NTF_DATE" />
                                                     <asp:BoundField HeaderText="STATUS" DataField="NTF_STATUS" />
-                                                    <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" />
+                                                    <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="btn btn-danger" />
                                                 </Columns>
                                             </asp:GridView>
                                         </div>
@@ -123,11 +123,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4" style="display: none;" runat="server" id="NotificationDetails">
+                        <div class="col-4"  runat="server" id="NotificationDetails">
+                            <asp:Panel ID="Panel1" runat="server" Visible="false">
                             <div class="card" style="width: 80rem; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; box-shadow: 5px 5px 16px 2px rgba(0,0,0,0.25); margin: 28px; min-width: 280px; max-width: 500px; margin-bottom: 20px; height: 443px;">
+                               <div class="card-header">
+                                <div class="row">
+                                     <div class="col-xl-8 d-flex justify-content-xxl-start align-items-xxl-center">
+                                    <h4 style="font-family: 'Source Sans Pro', sans-serif; font-weight: 700; color: rgb(255,160,0);">Notification</h4>
+                                    </div>
+                                    <div class="col-1 col-xl-3 d-flex justify-content-xxl-center align-items-xxl-center" style="padding-right: 0px; padding-left: 55px;">
+                                      <asp:ImageButton runat="server" src="assets/img/close.png" width="25" height="25" style="margin-left: 75px;" OnClick="Close_Click1" />
+                                      </div>
+                                </div>
+                               </div>
                                 <div class="card-body d-flex flex-column" style="height: 600px; width: 98%;">
                                     <div>
-                                        <h4 style="font-family: 'Source Sans Pro', sans-serif; font-weight: 700; color: rgb(255,160,0);">Notification</h4>
                                         <h6 class="text-muted mb-2" style="font-family: 'Source Sans Pro', sans-serif; font-weight: 600; color: #757575;">Subject</h6>
                                     </div>
                                     <asp:TextBox runat="server" Class="form-control" type="text" Enabled="false" ID="Subject"></asp:TextBox>
@@ -135,6 +145,7 @@
                                     <textarea class="form-control" style="height: 100%;" runat="server" id="Message" readonly=""></textarea>
                                 </div>
                             </div>
+                            </asp:Panel>
                         </div>
                     </div>
                 </div>

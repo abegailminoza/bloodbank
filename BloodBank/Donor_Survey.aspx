@@ -107,74 +107,99 @@
                                     Please complete this form
                                 </p>
                                 <table style="text-align: left; width: 50%; margin: auto">
-                                    <tr>
-                                        <td>Panel name:</td>
-                                        <td>
-                                            <input type="text" id="panelname" name="panelname" required="" value=" <%=ViewState["panelname"] %>" /></td>
-                                        <td>Donor name:</td>
-                                        <td>
-                                            <input type="text" id="donorname" name="donorname" required="" value=" <%=ViewState["donorname"] %>" /></td>
-                                    </tr>
-                                    <tr>
+                                     <tr>
                                         <td>Family name:</td>
                                         <td>
-                                            <input type="text" id="familyname" name="familyname" required="" value=" <%=ViewState["familyname"] %>" /></td>
+                                            <input type="text" id="familyname" class="form-control" name="familyname" required="" value=" <%=ViewState["familyname"] %>" /></td>
+                                    </tr>
+                                     <tr>
                                         <td>First name:</td>
                                         <td>
-                                            <input type="text" id="firstname" name="firstname" required="" value=" <%=ViewState["firstname"] %>" /></td>
+                                            <input type="text" id="firstname"  class="form-control" name="firstname" required="" value=" <%=ViewState["firstname"] %>" /></td>
                                     </tr>
                                     <tr>
-                                        <td>Title:</td>
+                                        <td>Middle name:</td>
                                         <td>
-                                            <input type="text" id="title" name="title" required="" value=" <%=ViewState["title"] %>" /></td>
-                                        <td>ID No:&nbsp;</td>
+                                            <input type="text" id="middlename"  class="form-control" name="middlename" required="" value=" <%=ViewState["middlename"] %>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gender:</td>
                                         <td>
-                                            <input type="text" id="idno" name="idno" required="" value=" <%=ViewState["idno"] %>" /></td>
+                                            <input type="text" id="gender" class="form-control" name="gender" required="" value=" <%=ViewState["gender"] %>" /></td>
+                                    </tr>
+                                     <tr>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Date of birth:</td>
-                                        <td>
-                                            <input type="date" id="dob" name="dob" required="" value=" <%=ViewState["dob"] %>" /></td>
-                                        <td>Gender:</td>
-                                        <td>
-                                            <input type="text" id="gender" name="gender" required="" value=" <%=ViewState["gender"] %>" /></td>
                                     </tr>
                                     <tr>
-                                        <td>Occupation:</td>
+                                         <td>Month:</td>
                                         <td>
-                                            <input type="text" id="occupation" name="occupation" required="" value=" <%=ViewState["occupation"] %>" /></td>
+                                            <input type="text" id="month" class="form-control" name="month" required="" value=" <%=ViewState["month"] %>" /></td>
+                                      </tr>  
+                                     <tr>
+                                         <td>Day:</td>
+                                        <td>
+                                            <input type="text" id="day" class="form-control" name="day" required="" value=" <%=ViewState["day"] %>" /></td>
+                                      </tr> 
+                                     <tr>
+                                         <td>Year:</td>
+                                        <td>
+                                            <input type="text" id="year" class="form-control" name="year" required="" value=" <%=ViewState["year"] %>" /></td>
+                                      </tr> 
+                                       <tr>
+                                        <td></td>
                                     </tr>
+                                    
+                                    
                                     <tr>
                                         <td>Residential Address:</td>
+                                        </tr>
+                                    <tr>
+                                         <td>Street/Sector:</td>
                                         <td>
-                                            <input type="text" id="resaddress" name="resaddress" required="" value=" <%=ViewState["resaddress"] %>" /></td>
+                                            <input type="text" id="street"  class="form-control"  name="street" required="" value=" <%=ViewState["street"] %>" /></td>
+                                    </tr>
+                                     <tr>
+                                         <td>Barangay:</td>
+                                        <td>
+                                            <input type="text" id="barangay"  class="form-control" name="barangay" required="" value=" <%=ViewState["barangay"] %>" /></td>
                                     </tr>
                                     <tr>
-                                        <td>Postal Address:</td>
+                                        <td>City:</td>
                                         <td>
-                                            <input type="text" id="posaddress" name="posaddress" required="" value=" <%=ViewState["posaddress"] %>" /></td>
+                                            <input type="text" id="city"  class="form-control"  name="city" required="" value=" <%=ViewState["city"] %>" /></td>
+                                    </tr>
+                                     <tr>
+                                         <td>Province:</td>
+                                        <td>
+                                            <input type="text" id="province"  class="form-control"  name="province" required="" value=" <%=ViewState["province"] %>" /></td>
+                                    </tr>
+                                     <tr>
+                                         <td>ZIP Code:</td>
+                                        <td>
+                                            <input type="text" id="zip"  class="form-control"  name="zip" required="" value=" <%=ViewState["zip"] %>" /></td>
                                     </tr>
                                     <tr>
-                                        <td><br />Telephone No.</td>
+                                        <td>
+                                           </td>
                                     </tr>
                                     <tr>
-                                        <td>Home:</td>
+                                        <td>Home number :</td>
                                         <td>
-                                            <input type="number" id="home" name="home" required="" value=" <%= Convert.ToInt32(ViewState["home"]) %>" /></td>
-                                        <td>Work:</td>
-                                        <td>
-                                            <input type="number" id="work" name="work" required="" value=" <%= Convert.ToInt32(ViewState["work"]) %>" /></td>
+                                            <input type="text" id="homenum"  class="form-control" name="homenum" required="" value=" <%= ViewState["homenum"] %>" /></td>
+                                        
                                     </tr>
                                     <tr>
-                                        <td>Mobile:</td>
+                                        <td>Mobile number:</td>
                                         <td>
-                                            <input type="number" id="mobile" name="mobile" required="" value=" <%= Convert.ToInt32(ViewState["mobile"]) %>" /></td>
+                                            <input type="text" id="mobilenum"  class="form-control" name="mobilenum" required="" value=" <%= ViewState["mobilenum"] %>" /></td>
                                     </tr>
                                     <tr>
                                         <td>Email Address:</td>
                                         <td>
-                                            <input type="text" id="email" name="email" required="" value=" <%=ViewState["email"] %>" />
-                                        </td>
+                                            <input type="text" id="email"  class="form-control" name="email" required="" value=" <%=ViewState["email"] %>" /></td>
                                     </tr>
                                 </table>
                                 <p style="font-size: 25px; font-style: bold; margin-left: -30%">

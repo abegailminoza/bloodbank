@@ -49,21 +49,21 @@ namespace BloodBank
             DonorSurvey ds = JsonConvert.DeserializeObject<DonorSurvey>(bd.BD_JSON_SURVEY_FORM);
 
             //Basic/Personal Information
-            ViewState["panelname"] = ds.personalInfo.PanelName;
-            ViewState["donorname"] = ds.personalInfo.DonorName;
-            ViewState["familyname"] = ds.personalInfo.FamilyName;
-            ViewState["firstname"] = ds.personalInfo.FirstName;
-            ViewState["title"] = ds.personalInfo.Title;
-            ViewState["idno"] = ds.personalInfo.IDNo;
-            ViewState["dob"] = ds.personalInfo.DateOfBirth;
+            ViewState["familyname"] = ds.personalInfo.Lname;
+            ViewState["firstname"] = ds.personalInfo.Fname;
+            ViewState["middlename"] = ds.personalInfo.Mname;
             ViewState["gender"] = ds.personalInfo.Gender;
-            ViewState["occupation"] = ds.personalInfo.Occupation;
-            ViewState["resaddress"] = ds.personalInfo.ResidentialAddress; ;
-            ViewState["posaddress"] = ds.personalInfo.PostalAddress;
-            ViewState["home"] = (ds.personalInfo.Home);
-            ViewState["work"] = ds.personalInfo.Work;
-            ViewState["mobile"] = ds.personalInfo.Mobile;
-            ViewState["email"] = ds.personalInfo.EmailAddress;
+            ViewState["month"] = ds.personalInfo.Month;
+            ViewState["day"] = ds.personalInfo.Day;
+            ViewState["year"] = ds.personalInfo.Year;
+            ViewState["street"] = ds.personalInfo.Street;
+            ViewState["barangay"] = ds.personalInfo.Barangay;
+            ViewState["city"] = ds.personalInfo.City; ;
+            ViewState["province"] = ds.personalInfo.Province;
+            ViewState["zip"] = ds.personalInfo.Zip;
+            ViewState["homenum"] = ds.personalInfo.Homenum;
+            ViewState["mobilenum"] = ds.personalInfo.Mobilenum;
+            ViewState["email"] = ds.personalInfo.Email;
 
             //Response.Write("<script>alert('" + ds.healthAssessment.N16d + "')</script>");
             //
@@ -263,7 +263,7 @@ Any valid ID
             }
             else
             {
-                query = string.Format(@"update blood_request set BREQ_SURVEY_STATUS=false, BREQ_BLOOD_STATUS=false, BREQ_REQ_STATUS={0} where BREQ_ID={1}", res, bd.BD_ID);
+                query = string.Format(@"update blood_donation set BD_SURVEY_STATUS={0}, BD_BLOOD_STATUS={1}, BD_REQ_STATUS={2} where BD_ID={3}", res, res,res, bd.BD_ID);
                 if (db.UpdateBloodRequestStatus(query))
                 {//Create Login Logs
                     string description = string.Format("{0} Rejected User {1} ( ", bb.BB_USERNAME, bd.BD_UACC_ID);
@@ -328,11 +328,14 @@ Your request has been rejected", bd.BD_ID));
 
                     SurveyGroup.Style.Add("display", "none");
                     BloodGroup.Style.Add("display", "none");
+
+                    query = string.Format(@"update user_account set UACC_DONOR={0} where UACC_ID={1}", res, bd.BD_UACC_ID);
+                    db.UpdateBloodRequestStatus(query);
                 }
             }
             else
             {
-                query = string.Format(@"update blood_donation set BD_BLOOD_STATUS=false, BD_REQ_STATUS={0} where BREQ_ID={1}", res, bd.BD_ID);
+                query = string.Format(@"update blood_donation set BD_BLOOD_STATUS={0}, BD_REQ_STATUS={1} where BREQ_ID={2}", res,res, bd.BD_ID);
                 if (db.UpdateBloodRequestStatus(query))
                 {//Create Login Logs
                     string description = string.Format("{0} Rejected User {1} ( ", bb.BB_USERNAME, bd.BD_UACC_ID);
@@ -359,11 +362,13 @@ Your request has been rejected", bd.BD_ID));
         protected void ApproveSurveyBtn_Click(object sender, EventArgs e)
         {
             UserRequestSurveyResponse(true);
+            Server.Transfer("~/BB_BloodTransaction.aspx");
         }
 
         protected void RejectSurveyBtn_Click(object sender, EventArgs e)
         {
             UserRequestSurveyResponse(false);
+            Server.Transfer("~/BB_BloodTransaction.aspx");
         }
 
         protected void ApproveBloodBtn_Click(object sender, EventArgs e)

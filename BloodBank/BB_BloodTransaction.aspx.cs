@@ -50,9 +50,9 @@ namespace BloodBank
                                             if(BREQ_SURVEY_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
                                             if(BREQ_SURVEY_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
                                             if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_SURVEY_STATUS,
-                                            if(BREQ_BLOOD_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
-                                            if(BREQ_BLOOD_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
-                                            if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_BLOOD_STATUS
+                                            if(BREQ_BLOOD_STATUS = false && BREQ_REQ_STATUS = true, '---', 
+                                            if(BREQ_BLOOD_STATUS = true && BREQ_REQ_STATUS = true, 'YES', 
+                                            if(BREQ_REQ_STATUS = false, 'REJECTED', 'NO'))) as BREQ_BLOOD_STATUS
                                              from blood_request");
             switch(stat)
             {
@@ -87,9 +87,9 @@ namespace BloodBank
                                             if(BD_SURVEY_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
                                             if(BD_SURVEY_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
                                             if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_SURVEY_STATUS,
-                                            if(BD_BLOOD_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
-                                            if(BD_BLOOD_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
-                                            if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_BLOOD_STATUS
+                                            if(BD_BLOOD_STATUS = false && BD_REQ_STATUS = true, '---', 
+                                            if(BD_BLOOD_STATUS = true && BD_REQ_STATUS = true, 'YES', 
+                                            if(BD_REQ_STATUS = false, 'REJECTED', 'NO'))) as BD_BLOOD_STATUS
                                              from blood_donation");
             switch (stat)
             {
@@ -162,9 +162,9 @@ namespace BloodBank
                                             if(BREQ_SURVEY_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
                                             if(BREQ_SURVEY_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
                                             if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_SURVEY_STATUS,
-                                            if(BREQ_BLOOD_STATUS = false && BREQ_REQ_STATUS = true, 'PENDING', 
-                                            if(BREQ_BLOOD_STATUS = true && BREQ_REQ_STATUS = true, 'APPROVED', 
-                                            if(BREQ_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BREQ_BLOOD_STATUS
+                                            if(BREQ_BLOOD_STATUS = false && BREQ_REQ_STATUS = true, '---', 
+                                            if(BREQ_BLOOD_STATUS = true && BREQ_REQ_STATUS = true, 'YES', 
+                                            if(BREQ_REQ_STATUS = false, 'REJECTED', 'NO'))) as BREQ_BLOOD_STATUS
                                              from blood_request where BREQ_UACC_ID={0};", SearchRequest.Text);
                     dt = db.GetBloodTransactionTableData(query);
                     if (dt != null)
@@ -184,8 +184,8 @@ namespace BloodBank
                                             if(BD_SURVEY_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
                                             if(BD_SURVEY_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
                                             if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_SURVEY_STATUS,
-                                            if(BD_BLOOD_STATUS = false && BD_REQ_STATUS = true, 'PENDING', 
-                                            if(BD_BLOOD_STATUS = true && BD_REQ_STATUS = true, 'APPROVED', 
+                                            if(BD_BLOOD_STATUS = false && BD_REQ_STATUS = true, '---', 
+                                            if(BD_BLOOD_STATUS = true && BD_REQ_STATUS = true, 'YES', 
                                             if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_BLOOD_STATUS
                                              from blood_donation where BD_UACC_ID={0};", SearchRequest.Text);
                     dt = db.GetuserBloodDonation(query);

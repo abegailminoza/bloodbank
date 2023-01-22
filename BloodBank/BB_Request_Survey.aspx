@@ -96,13 +96,13 @@
                     </div>
                 </nav>
                 <div class="container-fluid d-flex" style="justify-content: center; align-items: center;">
-                    <div class="card text-center" style="max-height: 700px; height: 700px; width: 80%;">
+                    <div class="card text-center" style="max-height: 800px; height: 800px; width: 80%;">
                         <div class="card-header">
                             <h2>BLOOD REQUEST FORM</h2>
                           
                         </div>
                         <div class="card-body">
-                            <div style="max-height: 500px; overflow: auto;">
+                            <div style="max-height: 600px; overflow: auto;">
                                 <p style="font-size: 25px; font-style: bold; margin-left: -30%">
                                     Please complete this form
                                 </p>
@@ -110,43 +110,113 @@
                                     <tr>
                                         <td>Family name:</td>
                                         <td>
-                                            <asp:TextBox runat="server" type="text" ID="familyname" name="familyname" required="" /></td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="text" ID="familyname" name="familyname" required="" /></td>
                                         <td>First name:</td>
                                         <td>
-                                            <asp:TextBox runat="server" type="text" ID="firstname" name="firstname" required="" /></td>
+                                            <asp:TextBox runat="server"   Class="form-control" type="text" ID="firstname" name="firstname" required="" /></td>
                                     </tr>
                                     <tr>
                                         <td>Middle name:</td>
                                         <td>
-                                            <asp:TextBox runat="server" type="text" ID="middlename" name="midname" required="" /></td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="text" ID="middlename" name="midname" required="" /></td>
                                     </tr>
                                     <tr>
-                                        <td>Date of birth:</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr><td>Date of birth:</td></tr>
+                                    <tr>
+                                        <td>Month:</td>
                                         <td>
-                                            <asp:TextBox runat="server" type="date" ID="dateofbirth" name="dateofbirth" required="" /></td>
+                                            <asp:DropDownList ID="month" runat="server" Class="form-control">
+                                                <asp:ListItem>January</asp:ListItem>
+                                                <asp:ListItem>Febraury</asp:ListItem>
+                                                <asp:ListItem>March</asp:ListItem>
+                                                <asp:ListItem>April</asp:ListItem>
+                                                <asp:ListItem>May</asp:ListItem>
+                                                <asp:ListItem>June</asp:ListItem>
+                                                <asp:ListItem>July</asp:ListItem>
+                                                <asp:ListItem>August</asp:ListItem>
+                                                <asp:ListItem>September</asp:ListItem>
+                                                <asp:ListItem>October</asp:ListItem>
+                                                <asp:ListItem>November</asp:ListItem>
+                                                <asp:ListItem>December</asp:ListItem>
+                                            </asp:DropDownList>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                        <td>Day:</td>
+                                        <td>
+                                            <asp:TextBox runat="server" Class="form-control" type="number" ID="day" name="dateofbirth" required="" />
+
+                                        </td>
+                                        
+                                        <td>Year:</td>
+                                        <td>
+                                            <asp:TextBox runat="server" Class="form-control" type="year" ID="year" name="dateofbirth" required="" /></td>
+                                         
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
                                         <td>Gender:</td>
                                         <td>
-                                            <asp:TextBox runat="server" type="text" ID="gender" name="gender" required="" /></td>
+                                            <asp:DropDownList ID="Sex" runat="server" Class="form-control">
+                                                <asp:ListItem>Female</asp:ListItem>
+                                                <asp:ListItem>Male</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                        
                                     </tr>
-                                    <tr>
-                                        <td>Age:</td>
-                                        <td>
-                                            <asp:TextBox runat="server" type="text" ID="Age" name="occupation" required="" /></td>
-                                    </tr>
+                                    
                                     <tr>
                                         <td>Blood Type Request:</td>
                                         <td>
-                                            <asp:TextBox runat="server" type="text" ID="bloobredtyperequest" name="occupation" required="" /></td>
+                                            <asp:DropDownList ID="Bloodtype" runat="server" Class="form-control" >
+                                                <asp:ListItem Value="Aplus">A+</asp:ListItem>
+                                                <asp:ListItem Value="Anega">A-</asp:ListItem>
+                                                <asp:ListItem Value="Bplus">B+</asp:ListItem>
+                                                <asp:ListItem Value="Bnega">B-</asp:ListItem>
+                                                <asp:ListItem Value="ABplus">AB+</asp:ListItem>
+                                                <asp:ListItem Value="ABnega">AB-</asp:ListItem>
+                                                <asp:ListItem Value="Oplus">O+</asp:ListItem>
+                                                <asp:ListItem Value="Onega">O-</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                            
+                                     </tr>
+                                    <tr>
+                                        <td>
+                                            <br />
+                                            Residential Address:.</td>
                                     </tr>
                                     <tr>
-                                        <td>Residential Address:</td>
+                                        
+
+                                        <td>Street/Sector: </td>
                                         <td>
-                                            <asp:TextBox runat="server" type="text" ID="resaddress" name="resaddress" required="" /></td>
+                                            <asp:TextBox runat="server" Class="form-control" type="text" ID="street" name="resaddress" required="" ></asp:TextBox></td>
                                     </tr>
                                     <tr>
-                                        <td>Postal Address:</td>
+                                        <td>Barangay:</td>
                                         <td>
-                                            <asp:TextBox runat="server" type="text" ID="posaddress" name="posaddress" required="" /></td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="text" ID="barangay" name="posaddress" required="" ></asp:TextBox></td>
+                                    </tr>
+                                     <tr>
+                                        <td>City:</td>
+                                        <td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="text" ID="city" name="city" required="" ></asp:TextBox></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Province:</td>
+                                        <td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="text" ID="province" name="posaddress" required="" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ZIP Code:</td>
+                                        <td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="number" ID="zip" name="posaddress" required="" ></asp:TextBox></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -156,29 +226,37 @@
                                     <tr>
                                         <td>Home:</td>
                                         <td>
-                                            <asp:TextBox runat="server" type="text" ID="Home" name="home" required="" /></td>
+                                            <asp:TextBox runat="server" Class="form-control" type="number" ID="Home" name="home" required="" ></asp:TextBox></td>
                                     </tr>
                                     <tr>
                                         <td>Mobile:</td>
                                         <td>
-                                            <asp:TextBox runat="server" type="text" ID="Mobile" name="mobile" required="" /></td>
+                                            <asp:TextBox runat="server"  Class="form-control" type="number" ID="Mobile" name="mobile" required="" ></asp:TextBox></td>
                                     </tr>
                                     <tr>
                                         <td>Email Address:</td>
                                         <td>
-                                            <asp:TextBox runat="server" type="text" ID="Email" name="email" required="" /></td>
+                                            <asp:TextBox runat="server" Class="form-control" type="email" ID="Email" name="email"  required=""></asp:TextBox></td>
                                     </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                             </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        </tr>
                                 </table>
                             </div>
                         </div>
                         <div class="card-footer text-muted">
                             <div runat="server" id="SurveyGroup" style="display: none;">
-                                <asp:Button runat="server" OnClick="ApproveSurveyBtn_Click" ID="ApproveSurveyBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Approve Request Form" />
-                                <asp:Button runat="server" OnClick="RejectSurveyBtn_Click" ID="RejectSurveyBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Reject Request Form" />
+                                <asp:Button runat="server" OnClick="ApproveSurveyBtn_Click" ID="ApproveSurveyBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Approve Request" />
+                                <asp:Button runat="server" OnClick="RejectSurveyBtn_Click" ID="RejectSurveyBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Reject Request" />
                             </div>
                             <div runat="server" id="BloodGroup" style="display: none;">
-                                <asp:Button runat="server" OnClick="ApproveBloodBtn_Click" ID="ApproveBloodBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Approve Blood Transaction" />
-                                <asp:Button runat="server" OnClick="RejectBloodBtn_Click" ID="RejectBloodBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Reject Blood Transaction" />
+                                <asp:Button runat="server" OnClick="ApproveBloodBtn_Click" ID="ApproveBloodBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Claimed" />
+                                <asp:Button runat="server" OnClick="RejectBloodBtn_Click" ID="RejectBloodBtn" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32);" type="button" Text="Not Claimed" />
                             </div>
                             <asp:Button runat="server" CssClass="btn btn-primary  btn-signin" Style="background: rgb(119,40,32); margin-top: 10px;" ID="BackButton" OnClick="BackButton_Click" Text="Back" type="reset" UseSubmitBehavior="false" AutoPostBack="true" />
                         </div>

@@ -166,6 +166,7 @@
     <Content Include="assets\img\bill.png" />
     <Content Include="assets\img\blood-donation.png" />
     <Content Include="assets\img\blood-drop.png" />
+    <Content Include="assets\img\close.png" />
     <Content Include="assets\img\dogs\image1.jpeg" />
     <Content Include="assets\img\dogs\image2.jpeg" />
     <Content Include="assets\img\dogs\image3.jpeg" />

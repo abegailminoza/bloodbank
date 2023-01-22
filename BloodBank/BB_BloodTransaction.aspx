@@ -99,7 +99,7 @@
                             <div class="card-header d-flex" style="flex-direction: row; justify-content: start; align-items: center;">
                                 <div class="d-flex" style="flex-direction: row; justify-content: center; align-items: start;margin-right: 20px;">
                                     <h5 style="margin-right: 5px;">Table</h5>
-                                    <asp:DropDownList runat="server" ID="TableView" AutoPostBack="true" OnSelectedIndexChanged="TableView_SelectedIndexChanged" />
+                                    <asp:DropDownList runat="server" ID="TableView" Class="" AutoPostBack="true" OnSelectedIndexChanged="TableView_SelectedIndexChanged" />
                                 </div>
                                 <div class="d-flex" style="flex-direction: row; justify-content: center; align-items: center; margin-right: 20px;">
                                     <h5 style="margin-right: 5px;">Search Blood Request ID</h5>
@@ -120,11 +120,11 @@
                                     <Columns>
                                         <asp:BoundField HeaderText="ID" DataField="BREQ_ID" />
                                         <asp:BoundField HeaderText="REQUESTER" DataField="BREQ_UACC_ID" />
-                                        <asp:BoundField HeaderText="INITIAL STATUS" DataField="BREQ_SURVEY_STATUS" />
-                                        <asp:BoundField HeaderText="REQUEST DATE" DataField="BREQ_DATE" />
-                                        <asp:BoundField HeaderText="VISITATION DATE" DataField="BREQ_VISIT_DATE" />
-                                        <asp:BoundField HeaderText="FINAL STATUS" DataField="BREQ_BLOOD_STATUS" />
-                                        <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="btn-danger" />
+                                        <asp:BoundField HeaderText="REQUEST STATUS" DataField="BREQ_SURVEY_STATUS" />
+                                        <asp:BoundField HeaderText="DATE" DataField="BREQ_DATE" />
+                                        <asp:BoundField HeaderText="EXPECTED DATE CLAIM" DataField="BREQ_VISIT_DATE" />
+                                        <asp:BoundField HeaderText="CLAIMED" DataField="BREQ_BLOOD_STATUS" />
+                                        <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="btn btn-danger" />
                                     </Columns>
                                 </asp:GridView>
                                 <asp:GridView runat="server" ID="GridUserBloodDonation" Visible="true" AutoGenerateColumns="false" Width="100%"
@@ -133,12 +133,12 @@
                                     AllowSorting="true">
                                     <Columns>
                                         <asp:BoundField HeaderText="ID" DataField="BD_ID" />
-                                        <asp:BoundField HeaderText="DONATOR" DataField="BD_UACC_ID" />
-                                        <asp:BoundField HeaderText="INITIAL STATUS" DataField="BD_SURVEY_STATUS" />
-                                        <asp:BoundField HeaderText="REQUEST DATE" DataField="BD_DATE" />
-                                        <asp:BoundField HeaderText="VISITATION DATE" DataField="BD_VISIT_DATE" />
-                                        <asp:BoundField HeaderText="FINAL STATUS" DataField="BD_BLOOD_STATUS" />
-                                        <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="btn-danger" />
+                                        <asp:BoundField HeaderText="DONOR" DataField="BD_UACC_ID" />
+                                        <asp:BoundField HeaderText="REQUEST STATUS" DataField="BD_SURVEY_STATUS" />
+                                        <asp:BoundField HeaderText="DATE" DataField="BD_DATE" />
+                                        
+                                        <asp:BoundField HeaderText="DONATED" DataField="BD_BLOOD_STATUS" />
+                                        <asp:CommandField ButtonType="Button" ShowSelectButton="true" SelectText="View" ControlStyle-CssClass="btn btn-danger" />
                                     </Columns>
                                 </asp:GridView>
                             </div>
