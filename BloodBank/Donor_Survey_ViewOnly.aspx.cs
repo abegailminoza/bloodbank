@@ -263,7 +263,7 @@ Any valid ID
             }
             else
             {
-                query = string.Format(@"update blood_request set BD_SURVEY_STATUS=false, BD_BLOOD_STATUS=false, BD_REQ_STATUS={0} where BD_ID={1}", res, bd.BD_ID);
+                query = string.Format(@"update blood_donation set BD_SURVEY_STATUS=false, BD_BLOOD_STATUS=false, BD_REQ_STATUS={0} where BD_ID={1}", res, bd.BD_ID);
                 if (db.UpdateBloodRequestStatus(query))
                 {//Create Login Logs
                     string description = string.Format("{0} Rejected User {1} ( ", bb.BB_USERNAME, bd.BD_UACC_ID);
