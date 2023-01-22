@@ -133,7 +133,7 @@
                     <div class="card text-center" style="max-height: 700px; height: 700px; width: 80%;">
                         <div class="card-header">
                            
-                            <h3>DONOR QUESTIONNAIRE</h3>
+                            <h3>BLOOD DONOR QUESTIONNAIRE</h3>
                         </div>
                         <div class="card-body">
                             <div style="max-height: 500px; overflow: auto;">

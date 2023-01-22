@@ -54,8 +54,10 @@
                         <ul class="navbar-nav flex-nowrap ml-auto">
                             <li class="nav-item dropdown no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow">
+
                                     <a class="dropdown-toggle nav-link dropleft" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter" runat="server" id="UnreadCount"></span><i class="fas fa-bell fa-fw"></i></a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+
                                         <h6 class="dropdown-header" style="background: rgb(119,40,32);">NOTIFICATIONS</h6>
                                         <div class="d-flex" style="flex-direction: column; max-height: 250px; overflow: auto; width: 100%;">
                                             <asp:Repeater runat="server" ID="NotificationNavList" OnItemCommand="NotificationNavList_ItemCommand">
