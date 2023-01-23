@@ -269,7 +269,11 @@ Any valid ID
             }
             else
             {
+
+                
+
                 query = string.Format(@"update blood_donation set BD_SURVEY_STATUS={0}, BD_BLOOD_STATUS={1}, BD_REQ_STATUS={2} where BD_ID={3}", res, res,res, bd.BD_ID);
+
                 if (db.UpdateBloodRequestStatus(query))
                 {//Create Login Logs
                     string description = string.Format("{0} Rejected User {1} ( ", bb.BB_USERNAME, bd.BD_UACC_ID);
@@ -341,7 +345,11 @@ Your request has been rejected", bd.BD_ID));
             }
             else
             {
+
+               
+
                 query = string.Format(@"update blood_donation set BD_BLOOD_STATUS={0}, BD_REQ_STATUS={1} where BREQ_ID={2}", res,res, bd.BD_ID);
+
                 if (db.UpdateBloodRequestStatus(query))
                 {//Create Login Logs
                     string description = string.Format("{0} Rejected User {1} ( ", bb.BB_USERNAME, bd.BD_UACC_ID);
