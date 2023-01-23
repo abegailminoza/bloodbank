@@ -87,58 +87,94 @@ namespace BloodBank
         protected global::System.Web.UI.WebControls.TextBox middlename;
 
         /// <summary>
-        /// dateofbirth control.
+        /// Sex control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dateofbirth;
+        protected global::System.Web.UI.WebControls.DropDownList Sex;
 
         /// <summary>
-        /// gender control.
+        /// month control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox gender;
+        protected global::System.Web.UI.WebControls.DropDownList month;
 
         /// <summary>
-        /// Age control.
+        /// day control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Age;
+        protected global::System.Web.UI.WebControls.TextBox day;
 
         /// <summary>
-        /// bloobredtyperequest control.
+        /// year control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox bloobredtyperequest;
+        protected global::System.Web.UI.WebControls.TextBox year;
 
         /// <summary>
-        /// resaddress control.
+        /// Bloodtype control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox resaddress;
+        protected global::System.Web.UI.WebControls.DropDownList Bloodtype;
 
         /// <summary>
-        /// posaddress control.
+        /// street control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox posaddress;
+        protected global::System.Web.UI.WebControls.TextBox street;
+
+        /// <summary>
+        /// barangay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox barangay;
+
+        /// <summary>
+        /// city control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox city;
+
+        /// <summary>
+        /// province control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox province;
+
+        /// <summary>
+        /// zip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox zip;
 
         /// <summary>
         /// Home control.

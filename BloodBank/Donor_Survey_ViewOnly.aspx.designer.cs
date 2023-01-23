@@ -735,6 +735,15 @@ namespace BloodBank
         protected global::System.Web.UI.WebControls.Button ApproveBloodBtn;
 
         /// <summary>
+        /// Resched control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Resched;
+
+        /// <summary>
         /// RejectBloodBtn control.
         /// </summary>
         /// <remarks>

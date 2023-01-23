@@ -52,15 +52,20 @@ namespace BloodBank
             familyname.Text = rq.lname;
             firstname.Text = rq.fname;
             middlename.Text = rq.mname;
-            gender.Text = rq.gender;
-            dateofbirth.Text = rq.dob;
-            Age.Text = rq.age;
-            bloobredtyperequest.Text = rq.brequest;
-            resaddress.Text = rq.raddress;
-            posaddress.Text = rq.paddress;
-            Home.Text = rq.home;
-            Mobile.Text = rq.mobile;
+            Sex.SelectedValue = rq.gender;
+            month.SelectedValue = rq.month;
+            day.Text = rq.day;
+            year.Text = rq.year;
+            Bloodtype.SelectedValue = rq.bloodtype;
+            city.Text = rq.city;
+            street.Text = rq.street;
+            province.Text = rq.province;
+            barangay.Text = rq.barangay;
+            zip.Text = rq.zip;
+            Home.Text = rq.homenum;
+            Mobile.Text = rq.mobilenum;
             Email.Text = rq.email;
+
 
             DisableInputs();
 
@@ -86,15 +91,22 @@ namespace BloodBank
             familyname.Enabled = false;
             firstname.Enabled = false;
             middlename.Enabled = false;
-            gender.Enabled = false;
-            dateofbirth.Enabled = false;
-            Age.Enabled = false;
-            bloobredtyperequest.Enabled = false;
-            resaddress.Enabled = false;
-            posaddress.Enabled = false;
+            month.Enabled = false;
+            day.Enabled = false;
+            year.Enabled = false;
+            Bloodtype.Enabled = false;
+            city.Enabled = false;
+            street.Enabled = false;
+            province.Enabled = false;
+            barangay.Enabled = false;
+            zip.Enabled = false;
             Home.Enabled = false;
             Mobile.Enabled = false;
             Email.Enabled = false;
+            Sex.Enabled = false;
+            BackButton.Visible = true;
+           
+
         }
 
         protected void BackButton_Click(object sender, EventArgs e)
@@ -105,11 +117,14 @@ namespace BloodBank
         protected void ApproveSurveyBtn_Click(object sender, EventArgs e)
         {
             UserRequestSurveyResponse(true);
+            Server.Transfer("~/BB_BloodTransaction.aspx");
         }
 
         protected void RejectSurveyBtn_Click(object sender, EventArgs e)
         {
+
             UserRequestSurveyResponse(false);
+            Server.Transfer("~/BB_BloodTransaction.aspx");
         }
 
         private void UserRequestSurveyResponse(bool res)
@@ -117,7 +132,9 @@ namespace BloodBank
             blood_request br = Session["BloodRequest"] as blood_request;
             bloodbank bb = Session["bloodbank"] as bloodbank;
             string query = "";
-            DateTime vDate = DateTime.Now.AddDays(2);
+            DateTime vdate = DateTime.Now.AddDays(3);
+            DateTime vDate = vdate.Date;
+
             if (res)
             {
                 query = string.Format(@"update blood_request set BREQ_SURVEY_STATUS={0}, BREQ_VISIT_DATE='{1}' where BREQ_ID={2}", res, vDate, br.BREQ_ID);
@@ -148,7 +165,7 @@ Doctor's consent for blood bag request with Doctor's name and signature
 Ice bucket filled with ice
 Processing fee: P1,500.00
                                                     
-*Please keep in mind that you can only claim your request until the following date: {1}
+*Please keep in mind that you can only claim your request until the following date: {1}.
 *Note: Show your Request ID to the bloodbank.", br.BREQ_ID, vDate));
                     query = string.Format(@"insert into notifications(NTF_SUBJECT, NTF_MESSAGE, NTF_RECEIVER_ID, NTF_SENDER_ID) 
                                                 values('{0}', '{1}', {2}, {3})", sbj, msg, br.BREQ_UACC_ID, bb.BB_ID);

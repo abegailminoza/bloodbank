@@ -49,21 +49,21 @@ namespace BloodBank
             DonorSurvey ds = JsonConvert.DeserializeObject<DonorSurvey>(bd.BD_JSON_SURVEY_FORM);
 
             //Basic/Personal Information
-            ViewState["panelname"] = ds.personalInfo.PanelName;
-            ViewState["donorname"] = ds.personalInfo.DonorName;
-            ViewState["familyname"] = ds.personalInfo.FamilyName;
-            ViewState["firstname"] = ds.personalInfo.FirstName;
-            ViewState["title"] = ds.personalInfo.Title;
-            ViewState["idno"] = ds.personalInfo.IDNo;
-            ViewState["dob"] = ds.personalInfo.DateOfBirth;
+            ViewState["familyname"] = ds.personalInfo.Lname;
+            ViewState["firstname"] = ds.personalInfo.Fname;
+            ViewState["middlename"] = ds.personalInfo.Mname;
             ViewState["gender"] = ds.personalInfo.Gender;
-            ViewState["occupation"] = ds.personalInfo.Occupation;
-            ViewState["resaddress"] = ds.personalInfo.ResidentialAddress; ;
-            ViewState["posaddress"] = ds.personalInfo.PostalAddress;
-            ViewState["home"] = (ds.personalInfo.Home);
-            ViewState["work"] = ds.personalInfo.Work;
-            ViewState["mobile"] = ds.personalInfo.Mobile;
-            ViewState["email"] = ds.personalInfo.EmailAddress;
+            ViewState["month"] = ds.personalInfo.Month;
+            ViewState["day"] = ds.personalInfo.Day;
+            ViewState["year"] = ds.personalInfo.Year;
+            ViewState["street"] = ds.personalInfo.Street;
+            ViewState["barangay"] = ds.personalInfo.Barangay;
+            ViewState["city"] = ds.personalInfo.City; ;
+            ViewState["province"] = ds.personalInfo.Province;
+            ViewState["zip"] = ds.personalInfo.Zip;
+            ViewState["homenum"] = ds.personalInfo.Homenum;
+            ViewState["mobilenum"] = ds.personalInfo.Mobilenum;
+            ViewState["email"] = ds.personalInfo.Email;
 
             //Response.Write("<script>alert('" + ds.healthAssessment.N16d + "')</script>");
             //
@@ -212,12 +212,16 @@ namespace BloodBank
             Response.Redirect("BB_BloodTransaction.aspx");
         }
 
+       
         private void UserRequestSurveyResponse(bool res)
         {
             blood_donation bd = Session["BloodDonation"] as blood_donation;
             bloodbank bb = Session["bloodbank"] as bloodbank;
             string query = "";
-            DateTime vDate = DateTime.Now.AddDays(2);
+
+            DateTime vdate = DateTime.Now.AddDays(8);
+            DateTime vDate = vdate.Date;
+
             if (res)
             {
                 query = string.Format(@"update blood_donation set BD_SURVEY_STATUS={0}, BD_VISIT_DATE='{1}' where BD_ID={2}", res, vDate, bd.BD_ID);
@@ -238,14 +242,16 @@ namespace BloodBank
                     }
 
                     //Send Notification
-                    string sbj = "Blood Donation Form Accepted";
+                    string sbj = "Blood Donation Request Accepted";
                     string msg = MySqlHelper.EscapeString(string.Format(@"Your Request ID {0}
-Your request has been approved you may now proceed to claim your request.
                                                     
-Your request has been approved you may now proceed to donate.
+Your request has been approved and you may now proceed to the blood bank.
+A screening test and a health check will be conducted by the Blood Bank prior to your blood donation.
+
 Please bring the following with you: {1}
 Any valid ID
 
+*Note:You are allowed to visit blood bank within 7 days.
 *Note: Show your Request ID to the bloodbank.", bd.BD_ID, vDate));
                     query = string.Format(@"insert into notifications(NTF_SUBJECT, NTF_MESSAGE, NTF_RECEIVER_ID, NTF_SENDER_ID) 
                                                 values('{0}', '{1}', {2}, {3})", sbj, msg, bd.BD_UACC_ID, bb.BB_ID);
@@ -263,7 +269,11 @@ Any valid ID
             }
             else
             {
-                query = string.Format(@"update blood_donation set BD_SURVEY_STATUS=false, BD_BLOOD_STATUS=false, BD_REQ_STATUS={0} where BD_ID={1}", res, bd.BD_ID);
+
+                
+
+                query = string.Format(@"update blood_donation set BD_SURVEY_STATUS={0}, BD_BLOOD_STATUS={1}, BD_REQ_STATUS={2} where BD_ID={3}", res, res,res, bd.BD_ID);
+
                 if (db.UpdateBloodRequestStatus(query))
                 {//Create Login Logs
                     string description = string.Format("{0} Rejected User {1} ( ", bb.BB_USERNAME, bd.BD_UACC_ID);
@@ -280,7 +290,7 @@ Any valid ID
                     }
 
                     //Send Notification
-                    string sbj = "Blood Donation Form Accepted";
+                    string sbj = "Blood Donation Request Rejected";
                     string msg = MySqlHelper.EscapeString(string.Format(@"Your Request ID {0}
 Your request has been rejected", bd.BD_ID));
                     query = string.Format(@"insert into notifications(NTF_SUBJECT, NTF_MESSAGE, NTF_RECEIVER_ID, NTF_SENDER_ID) 
@@ -291,7 +301,7 @@ Your request has been rejected", bd.BD_ID));
                     }
 
                     //Success
-                    Response.Write(string.Format("<script>alert('User {0} blood request survey was successfully rejected.')</script>", bd.BD_UACC_ID));
+                    Response.Write(string.Format("<script>alert('User {0} blood request survey was  rejected.')</script>", bd.BD_UACC_ID));
 
                     SurveyGroup.Style.Add("display", "none");
                     BloodGroup.Style.Add("display", "none");
@@ -328,11 +338,18 @@ Your request has been rejected", bd.BD_ID));
 
                     SurveyGroup.Style.Add("display", "none");
                     BloodGroup.Style.Add("display", "none");
+
+                    query = string.Format(@"update user_account set UACC_DONOR={0} where UACC_ID={1}", res, bd.BD_UACC_ID);
+                    db.UpdateBloodRequestStatus(query);
                 }
             }
             else
             {
-                query = string.Format(@"update blood_donation set BD_BLOOD_STATUS=false, BD_REQ_STATUS={0} where BD_ID={1}", res, bd.BD_ID);
+
+               
+
+                query = string.Format(@"update blood_donation set BD_BLOOD_STATUS={0}, BD_REQ_STATUS={1} where BREQ_ID={2}", res,res, bd.BD_ID);
+
                 if (db.UpdateBloodRequestStatus(query))
                 {//Create Login Logs
                     string description = string.Format("{0} Rejected User {1} ( ", bb.BB_USERNAME, bd.BD_UACC_ID);
@@ -356,14 +373,56 @@ Your request has been rejected", bd.BD_ID));
             }
         }
 
+        private void UserReschedResponse()
+        {
+            blood_donation bd = Session["BloodDonation"] as blood_donation;
+            bloodbank bb = Session["bloodbank"] as bloodbank;
+            string query = "";
+
+            DateTime vdate = DateTime.Now.AddDays(8);
+            DateTime vDate = vdate.Date;
+
+            query = string.Format(@"update blood_donation set BD_VISIT_DATE='{0}' where BD_ID={1}", vDate, bd.BD_ID);
+            if (db.UpdateBloodRequestStatus(query))
+            {
+                string description = string.Format("{0} Reschedule User {1} ( ", bb.BB_USERNAME, bd.BD_UACC_ID);
+                query = string.Format(@"insert into activity_logs(ACT_DESCRIPTION, ACT_UACC_ID, ACT_UNAME)
+                                            select concat('{0}', UACC_FIRST, ' ', UACC_LAST, ' ) Final  Blood Donation Request Form'), {1}, '{2}' from user_account
+                                            where UACC_ID={3};", description, bb.BB_ID, "BloodBank", bd.BD_UACC_ID);
+
+                Debug.Print(query);
+                bool x = db.InsertBloodBankLogs(query);
+                //If Not Successfully Inserted Logs
+                if (!x)
+                {
+                    Debug.Print("BloodBank Logs Not Inserted");
+                }
+                //Success
+                Response.Write(string.Format("<script>alert('User {0} blood donation was successfully rescheduled.')</script>", bd.BD_ID));
+
+                SurveyGroup.Style.Add("display", "none");
+                BloodGroup.Style.Add("display", "none");
+
+               
+            }
+            else
+            {
+                Response.Write(string.Format("<script>alert('Error updating')</script>"));
+            }
+
+               
+        }
+
         protected void ApproveSurveyBtn_Click(object sender, EventArgs e)
         {
             UserRequestSurveyResponse(true);
+            Server.Transfer("~/BB_BloodTransaction.aspx");
         }
 
         protected void RejectSurveyBtn_Click(object sender, EventArgs e)
         {
             UserRequestSurveyResponse(false);
+            Server.Transfer("~/BB_BloodTransaction.aspx");
         }
 
         protected void ApproveBloodBtn_Click(object sender, EventArgs e)
@@ -374,6 +433,11 @@ Your request has been rejected", bd.BD_ID));
         protected void RejectBloodBtn_Click(object sender, EventArgs e)
         {
             UserRequestBloodResponse(false);
+        }
+
+        protected void Resched_Click(object sender, EventArgs e)
+        {
+            UserReschedResponse();
         }
 
         protected void BtnLogout_ServerClick(object sender, EventArgs e)

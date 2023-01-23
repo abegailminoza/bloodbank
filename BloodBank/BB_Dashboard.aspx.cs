@@ -48,23 +48,49 @@ namespace BloodBank
             string query = "select count(*) as USER_COUNT from user_account where UACC_STATUS=true;";
             TotalNumberUser.InnerText = db.GetCount(query).ToString();
 
-            query = "select count(distinct BREQ_UACC_ID) as REQ_COUNT from blood_request join user_account on UACC_ID=BREQ_UACC_ID where UACC_STATUS=true;";
+            query = "select count(*) as USER_COUNT from user_account where UACC_REQUESTOR=true";
             NumberRequestor.InnerText = db.GetCount(query).ToString();
 
-            query = "select count(distinct BD_UACC_ID) as DON_COUNT from blood_donation join user_account on UACC_ID=BD_UACC_ID where (BD_SURVEY_STATUS = true and BD_BLOOD_STATUS = true) and BD_REQ_STATUS=true and UACC_STATUS=true;";
+            query = "select count(*) as USER_COUNT from user_account where UACC_DONOR=true";
             NumberDonor.InnerText = db.GetCount(query).ToString();
 
-
-            //Populate Transaction NUmbers
-            query = @"select ((select count(*) from blood_donation where (BD_SURVEY_STATUS = false or BD_BLOOD_STATUS = false) and BD_REQ_STATUS=true)
-                        + (select count(*) from blood_request where (BREQ_SURVEY_STATUS = false or BREQ_BLOOD_STATUS = false) and BREQ_REQ_STATUS=true)) as Total;";
+            //Populate Pending Initial Transaction NUmbers
+            query = @"select ((select count(*) from blood_donation where BD_SURVEY_STATUS=false and BD_BLOOD_STATUS=false and BD_REQ_STATUS=true)
+                        + (select count(*) from blood_request where BREQ_SURVEY_STATUS=false and BREQ_BLOOD_STATUS=false and BREQ_REQ_STATUS=true)) as Total;";
             TotalNumberTransaction.InnerText = db.GetCount(query).ToString();
 
-            query = @"select count(*) from blood_request where (BREQ_SURVEY_STATUS = false or BREQ_BLOOD_STATUS = false) and BREQ_REQ_STATUS=true;";
+            query = @"select count(*) from blood_request where BREQ_SURVEY_STATUS = false and BREQ_BLOOD_STATUS=false and BREQ_REQ_STATUS=true;";
             NumberRequestTransaction.InnerText = db.GetCount(query).ToString();
 
-            query = @"select count(*) from blood_donation where (BD_SURVEY_STATUS = false or BD_BLOOD_STATUS = false) and BD_REQ_STATUS=true;";
+            query = @"select count(*) from blood_donation where BD_SURVEY_STATUS = false and BD_BLOOD_STATUS=false and BD_REQ_STATUS=true;";
             NumberDonationTransaction.InnerText = db.GetCount(query).ToString();
+
+
+
+            //Populate Approved Initial Transaction NUmbers
+            query = @"select ((select count(*) from blood_donation where BD_SURVEY_STATUS = true and (BD_BLOOD_STATUS=false or BD_BLOOD_STATUS=true) and BD_REQ_STATUS=true)
+                        + (select count(*) from blood_request where BREQ_SURVEY_STATUS = true and (BREQ_BLOOD_STATUS=false or BREQ_BLOOD_STATUS=true) and BREQ_REQ_STATUS=true)) as Total;";
+           TotalApproved.InnerText = db.GetCount(query).ToString();
+
+            query = @"select count(*) from blood_request where BREQ_SURVEY_STATUS = true and (BREQ_BLOOD_STATUS=false or BREQ_BLOOD_STATUS=true) and BREQ_REQ_STATUS=true;";
+           BR_Approved.InnerText = db.GetCount(query).ToString();
+
+            query = @"select count(*) from blood_donation where BD_SURVEY_STATUS = true and (BD_BLOOD_STATUS=false or BD_BLOOD_STATUS=true) and BD_REQ_STATUS=true;";
+           BD_Approved.InnerText = db.GetCount(query).ToString();
+
+
+            //Populate Completef Transaction NUmbers
+            query = @"select ((select count(*) from blood_donation where (BD_SURVEY_STATUS = true or BD_BLOOD_STATUS = true) and BD_REQ_STATUS=true)
+                        + (select count(*) from blood_request where (BREQ_SURVEY_STATUS = true or BREQ_BLOOD_STATUS = false) and BREQ_REQ_STATUS=true)) as Total;";
+           // TotalNumberTransaction.InnerText = db.GetCount(query).ToString();
+
+            query = @"select count(*) from blood_request where (BREQ_SURVEY_STATUS = true or BREQ_BLOOD_STATUS = true) and BREQ_REQ_STATUS=true;";
+           // NumberRequestTransaction.InnerText = db.GetCount(query).ToString();
+
+            query = @"select count(*) from blood_donation where (BD_SURVEY_STATUS = true or BD_BLOOD_STATUS = true) and BD_REQ_STATUS=true;";
+           // NumberDonationTransaction.InnerText = db.GetCount(query).ToString();
+
+
 
             object sender = new object();
             EventArgs e = new EventArgs();

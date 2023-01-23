@@ -141,7 +141,7 @@ namespace BloodBank
             {
                 if (ntf.NTF_SENDER_ID != null)
                 {
-                    NotificationDetails.Style.Add("display", "");
+                    Panel1.Visible = true;
                     Subject.Text = ntf.NTF_SUBJECT;
                     Message.InnerText = ntf.NTF_MESSAGE;
 
@@ -167,7 +167,7 @@ namespace BloodBank
             {
                 if (ntf.NTF_SENDER_ID != null)
                 {
-                    NotificationDetails.Style.Add("display", "");
+                    Panel1.Visible = true;
                     Subject.Text = ntf.NTF_SUBJECT;
                     Message.InnerText = ntf.NTF_MESSAGE;
 
@@ -185,7 +185,9 @@ namespace BloodBank
             }
         }
 
-
-
+        protected void Close_Click1(object sender, ImageClickEventArgs e)
+        {
+            Panel1.Visible = false;
+        }
     }
 }

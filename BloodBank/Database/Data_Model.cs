@@ -66,15 +66,19 @@ namespace BloodBank.Database
         public string lname { get; set; }
         public string fname { get; set; }
         public string mname { get; set; }
+        public string month { get; set; }
+        public string day { get; set; }
+        public string year { get; set; }
         public string gender { get; set; }
-        public string dob { get; set; }
-        public string age { get; set; }
-        public string brequest { get; set; }
-        public string raddress { get; set; }
-        public string paddress { get; set; }
-        public string home { get; set; }
-        public string mobile { get; set; }
+        public string bloodtype { get; set; }
+        public string barangay { get; set; }
+        public string city { get; set; }
+        public string province { get; set; }
+        public string zip { get; set; }
+        public string homenum { get; set; }
+        public string mobilenum { get; set; }
         public string email { get; set; }
+        public string street { get; set; }
     }
 
     [Serializable]
@@ -106,21 +110,21 @@ namespace BloodBank.Database
     [Serializable]
     public class PersonalInfo
     {
-        public string PanelName { get; set; }
-        public string DonorName { get; set; }
-        public string FamilyName { get; set; }
-        public string FirstName { get; set; }
-        public string Title { get; set; }
-        public string IDNo { get; set; }
-        public string DateOfBirth { get; set; }
+        public string Lname { get; set; }
+        public string Fname { get; set; }
+        public string Mname { get; set; }
+        public string Month { get; set; }
+        public string Day { get; set; }
+        public string Year { get; set; }
         public string Gender { get; set; }
-        public string Occupation { get; set; }
-        public string ResidentialAddress { get; set; }
-        public string PostalAddress { get; set; }
-        public string Home { get; set; }
-        public string Work { get; set; }
-        public string Mobile { get; set; }
-        public string EmailAddress { get; set; }
+        public string Barangay { get; set; }
+        public string City { get; set; }
+        public string Province { get; set; }
+        public string Zip { get; set; }
+        public string Homenum { get; set; }
+        public string Mobilenum { get; set; }
+        public string Email { get; set; }
+        public string Street { get; set; }
     }
 
     [Serializable]

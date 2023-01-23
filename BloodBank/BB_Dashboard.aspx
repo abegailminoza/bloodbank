@@ -7,7 +7,7 @@
     <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>Dashboard</title>
+    <title>Dashboard | Blood Bank</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans" />
@@ -164,7 +164,7 @@
                                                 <div class="col d-flex" style="margin-bottom: 10px;">
                                                     <div class="card" style="width: 100%;">
                                                         <div class="card-header" style="padding: 0px; padding-top: 9px; background: #25476a;">
-                                                            <h3 class="text-center" style="font-weight: bold; color: var(--white);">PENDING TRANSACTIONS</h3>
+                                                            <h3 class="text-center" style="font-weight: bold; color: var(--white);">PENDING REQUEST</h3>
                                                         </div>
                                                         <div class="card-body" style="width: 100%;">
                                                             <div class="row">
@@ -243,6 +243,75 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="col-6">
+                                            <div class="row d-flex flex-column">
+                                                <div class="col d-flex" style="margin-bottom: 10px;">
+                                                    <div class="card" style="width: 100%;">
+                                                        <div class="card-header" style="padding: 0px; padding-top: 9px; background: #25476a;">
+                                                            <h3 class="text-center" style="font-weight: bold; color: var(--white);">APPROVED REQUEST</h3>
+                                                        </div>
+                                                        <div class="card-body" style="width: 100%;">
+                                                            <div class="row">
+                                                                <div class="col d-flex justify-content-xl-center align-items-xl-center">
+                                                                    <h1 runat="server" id="TotalApproved"></h1>
+                                                                </div>
+                                                                <div class="col-2 d-flex justify-content-xl-center align-items-xl-center">
+                                                                    <img src="assets/img/bill.png" width="30">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="card" style="width: 100%;">
+                                                                <div class="card-header" style="padding: 0px; padding-top: 9px; background: #25476a;">
+                                                                    <h5 class="text-center" style="font-weight: bold; color: var(--white);">REQUESTS(BLOOD)</h5>
+                                                                </div>
+                                                                <div class="card-body" style="width: 100%;">
+                                                                    <div class="row">
+                                                                        <div class="col d-flex justify-content-xl-center align-items-xl-center">
+                                                                            <h1 runat="server" id="BR_Approved"></h1>
+                                                                        </div>
+                                                                        <div class="col-3 d-flex justify-content-xl-center align-items-xl-center">
+                                                                            <img src="assets/img/blood-drop.png" width="30">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="card" style="width: 100%;">
+                                                                <div class="card-header" style="padding: 0px; padding-top: 9px; background: #25476a;">
+                                                                    <h5 class="text-center" style="font-weight: bold; color: var(--white);">REQUESTS(DONOR)</h5>
+                                                                </div>
+                                                                <div class="card-body" style="width: 100%;">
+                                                                    <div class="row">
+                                                                        <div class="col d-flex justify-content-xl-center align-items-xl-center">
+                                                                            <h1 runat="server" id="BD_Approved"></h1>
+                                                                        </div>
+                                                                        <div class="col-3 d-flex justify-content-xl-center align-items-xl-center">
+                                                                            <img src="assets/img/blood-donation.png" width="30">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+
+
+
+
+
                         </div>
                     </div>
                 </div>
