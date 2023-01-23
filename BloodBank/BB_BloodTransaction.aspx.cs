@@ -60,10 +60,10 @@ namespace BloodBank
                     query += " order by BREQ_DATE desc;";
                     break;
                 case "1":
-                    query += " where (BREQ_SURVEY_STATUS=false and BREQ_REQ_STATUS=true) or (BREQ_BLOOD_STATUS=false and BREQ_REQ_STATUS=true) order by BREQ_DATE desc;";
+                    query += " where BREQ_SURVEY_STATUS=false and BREQ_BLOOD_STATUS=false and BREQ_REQ_STATUS=true order by BREQ_DATE desc;";
                     break;
                 case "2":
-                    query += " where BREQ_BLOOD_STATUS=true and BREQ_REQ_STATUS=true order by BREQ_DATE desc;";
+                    query += " where BREQ_SURVEY_STATUS=true and (BREQ_BLOOD_STATUS=false or BREQ_BLOOD_STATUS=true) and BREQ_REQ_STATUS=true order by BREQ_DATE desc;";
                     break;
                 case "3":
                     query += " where BREQ_REQ_STATUS=false order by BREQ_DATE desc;";
@@ -97,10 +97,10 @@ namespace BloodBank
                     query += " order by BD_DATE desc;";
                     break;
                 case "1":
-                    query += " where (BD_SURVEY_STATUS=false and BD_REQ_STATUS=true) or (BD_BLOOD_STATUS=false and BD_REQ_STATUS=true) order by BD_DATE desc;";
+                    query += " where BD_SURVEY_STATUS=false and BD_BLOOD_STATUS=false and BD_REQ_STATUS=true order by BD_DATE desc;";
                     break;
                 case "2":
-                    query += " where BD_BLOOD_STATUS=true and BD_REQ_STATUS=true order by BD_DATE desc;";
+                    query += " where BD_SURVEY_STATUS=true and (BD_BLOOD_STATUS=false or BD_BLOOD_STATUS=true) and BD_REQ_STATUS=true order by BD_DATE desc;";
                     break;
                 case "3":
                     query += " where BD_REQ_STATUS=false order by BD_DATE desc;";
@@ -165,7 +165,7 @@ namespace BloodBank
                                             if(BREQ_BLOOD_STATUS = false && BREQ_REQ_STATUS = true, '---', 
                                             if(BREQ_BLOOD_STATUS = true && BREQ_REQ_STATUS = true, 'YES', 
                                             if(BREQ_REQ_STATUS = false, 'REJECTED', 'NO'))) as BREQ_BLOOD_STATUS
-                                             from blood_request where BREQ_UACC_ID={0};", SearchRequest.Text);
+                                             from blood_request where BREQ_ID={0};", SearchRequest.Text);
                     dt = db.GetBloodTransactionTableData(query);
                     if (dt != null)
                     {
@@ -187,7 +187,7 @@ namespace BloodBank
                                             if(BD_BLOOD_STATUS = false && BD_REQ_STATUS = true, '---', 
                                             if(BD_BLOOD_STATUS = true && BD_REQ_STATUS = true, 'YES', 
                                             if(BD_REQ_STATUS = false, 'REJECTED', 'REJECTED'))) as BD_BLOOD_STATUS
-                                             from blood_donation where BD_UACC_ID={0};", SearchRequest.Text);
+                                             from blood_donation where BD_ID={0};", SearchRequest.Text);
                     dt = db.GetuserBloodDonation(query);
                     if (dt != null)
                     {

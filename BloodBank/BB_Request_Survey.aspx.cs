@@ -132,7 +132,9 @@ namespace BloodBank
             blood_request br = Session["BloodRequest"] as blood_request;
             bloodbank bb = Session["bloodbank"] as bloodbank;
             string query = "";
-            DateTime vDate = DateTime.Now.AddDays(2);
+            DateTime vdate = DateTime.Now.AddDays(3);
+            DateTime vDate = vdate.Date;
+
             if (res)
             {
                 query = string.Format(@"update blood_request set BREQ_SURVEY_STATUS={0}, BREQ_VISIT_DATE='{1}' where BREQ_ID={2}", res, vDate, br.BREQ_ID);
@@ -163,7 +165,7 @@ Doctor's consent for blood bag request with Doctor's name and signature
 Ice bucket filled with ice
 Processing fee: P1,500.00
                                                     
-*Please keep in mind that you can only claim your request until the following date: {1}
+*Please keep in mind that you can only claim your request until the following date: {1}.
 *Note: Show your Request ID to the bloodbank.", br.BREQ_ID, vDate));
                     query = string.Format(@"insert into notifications(NTF_SUBJECT, NTF_MESSAGE, NTF_RECEIVER_ID, NTF_SENDER_ID) 
                                                 values('{0}', '{1}', {2}, {3})", sbj, msg, br.BREQ_UACC_ID, bb.BB_ID);

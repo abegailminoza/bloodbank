@@ -7,7 +7,7 @@
     <link rel="icon" runat="server" href="~/assets/img/321479999_548324667206662_5830804446592810955_n.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>Notification</title>
+    <title>Notification | Blood Bank</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans" />
@@ -36,7 +36,7 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" href="BB_Dashboard.aspx"><i class="fas fa-tachometer-alt" style="font-size: 20px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="BB_Dashboard.aspx"><i class="fas fa-tachometer-alt" style="font-size: 20px;"></i><span style="font-size: 15px;">Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="BB_BloodTransaction.aspx"><i class="fa fa-tint" style="font-size: 20px;"></i><span style="font-size: 15px;">Blood Transaction</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="BB_ActionLogs.aspx"><i class="fa fa-list-ul" style="font-size: 20px;"></i><span style="font-size: 15px;">Action Logs</span></a></li>
                 </ul>
@@ -105,7 +105,7 @@
 
                                 <div class="card-body">
                                     <h3 runat="server" id="NoDataMsg" style="display: none;">No Data</h3>
-                                    <div runat="server" id="TableContainer" style="max-height: 450px">
+                                    <div runat="server" id="TableContainer" style="max-height: 600px">
                                         <div id="VerticalScroll" style="overflow: auto; max-height: inherit;">
                                             <asp:GridView runat="server" ID="NotificationGrid" AutoGenerateColumns="false" Width="100%"
                                                 BorderColor="Transparent" AutoPostBack="true" OnSelectedIndexChanged="NotificationGrid_SelectedIndexChanged">
