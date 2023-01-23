@@ -146,7 +146,22 @@ namespace BloodBank
 
         protected void RequestStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PopulateRequestBloodGrid();
+            int table = TableView.SelectedIndex;
+            switch (table)
+            {
+                case 0:
+                    GridUserBloodRequest.Style.Add("display", "");
+                    GridUserBloodDonation.Style.Add("display", "none");
+                    HeadingText.InnerText = "Blood Request Transactions";
+                    PopulateRequestBloodGrid();
+                    break;
+                case 1:
+                    GridUserBloodRequest.Style.Add("display", "none");
+                    GridUserBloodDonation.Style.Add("display", "");
+                    HeadingText.InnerText = "Blood Donation Transactions";
+                    PopulateDonationBloodGrid();
+                    break;
+            }
         }
 
         protected void SearchBloodRequest_Click(object sender, EventArgs e)
